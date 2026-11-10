@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="treeTrunk" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#43302e" />
+      <stop offset="100%" stop-color="#291a16" />
+    </linearGradient>
+    <linearGradient id="treeFoliage" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#16a34a" />
+      <stop offset="50%" stop-color="#22c55e" />
+      <stop offset="100%" stop-color="#4ade80" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(200, 550)">
+    <path d="M-18 0 L-10 -22 L-22 -32 L-5 -32 L0 -50 L5 -32 L22 -32 L10 -22 Z" fill="url(#treeFoliage)" />
+    <path d="M-10 -32 L-4 -52 L-16 -62 L-1 -62 L5 -52 Z" fill="url(#treeFoliage)" opacity="0.8" />
+    <path d="M0 -50 L3 -70 L-7 -80 L-2 -80 L-7 -70 Z" fill="url(#treeFoliage)" opacity="0.6" />
+    <rect x="-4" y="0" width="8" height="60" fill="url(#treeTrunk)" rx="2" />
+  </g>
+</svg>

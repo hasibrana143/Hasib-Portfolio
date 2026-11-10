@@ -1,0 +1,197 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - link "welcome" [ref=e5] [cursor=pointer]:
+        - /url: https://code-master.be
+      - link "discover" [ref=e6] [cursor=pointer]:
+        - /url: https://code-master.be/discover
+    - link [ref=e8] [cursor=pointer]:
+      - /url: https://code-master.be
+      - img "freelance web design from Belgium - codemaster logo" [ref=e9]
+    - generic [ref=e10]:
+      - link "explore" [ref=e11] [cursor=pointer]:
+        - /url: https://code-master.be/explore
+      - link "contact" [ref=e12] [cursor=pointer]:
+        - /url: https://code-master.be/contact
+  - banner [ref=e13]:
+    - generic [ref=e14]:
+      - img "the sun" [ref=e16]
+      - img "montains" [ref=e18]
+      - img "clouds" [ref=e20]
+      - img "clouds" [ref=e22]
+      - img "clouds" [ref=e24]
+      - img "clouds" [ref=e26]
+      - img "the fourth layer of the coding forest" [ref=e28]
+      - heading "web design & development" [level=1] [ref=e30]
+      - img "the third layer of the coding forest" [ref=e32]
+      - img "the seconde layer of the coding forest" [ref=e34]
+      - img "first layer of the coding forest" [ref=e36]
+    - generic:
+      - img "a close up tree of the forest" [ref=e38]
+      - img "a close up tree of the forest" [ref=e40]
+      - img "a close up tree of the forest" [ref=e42]
+      - img "a close up tree of the forest" [ref=e44]
+      - img "a close up tree of the forest" [ref=e46]
+      - img "a close up tree of the forest" [ref=e48]
+  - main [ref=e49]:
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - heading "Need a freelance web designer for your website?" [level=2] [ref=e53]: Need a freelance web designerfor your website?
+        - link "Let's get started" [ref=e55] [cursor=pointer]:
+          - /url: https://code-master.be/contact
+      - paragraph [ref=e58]:
+        - text: Hey there! I am a
+        - strong [ref=e59]: creative freelance designer and developer
+        - text: based in Antwerp, Belgium. With more than 5 years of experience in the field, I aim to create websites that offer a
+        - strong [ref=e60]: modern look and feel
+        - text: and that are powered by code that’s just as beautiful, as well as scalable.
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - img "The place where all the coding and the designing happens" [ref=e64]
+        - img "a close up blur tree of the forest" [ref=e146]
+      - generic [ref=e147]:
+        - heading "What to expect" [level=3] [ref=e149]: What toexpect
+        - img "a close up blur tree of the forest" [ref=e151]
+    - generic [ref=e155]:
+      - heading "1. Understanding your idea" [level=4] [ref=e156]
+      - paragraph [ref=e157]:
+        - text: The first phase is actually the most important one, as it involves a solid understanding of
+        - strong [ref=e158]: the vision you have and the goals you want to achieve
+        - text: . It involves also a good perception of what
+        - strong [ref=e159]: your business goals and dreams
+        - text: are, and how the web can be utilized to help you
+        - strong [ref=e160]: achieve those goals
+        - text: .
+    - generic [ref=e172]:
+      - heading "2. Crafting a stunning design" [level=4] [ref=e173]
+      - paragraph [ref=e174]:
+        - text: In the next phase, the main focus will lie on the digital design, from branding to user experience and user interface design solutions. Your idea will be transformed into
+        - strong [ref=e175]: a user-friendly web design
+        - text: built with simplicity in mind.
+    - generic:
+      - generic:
+        - img "closed up tree of the forest" [ref=e176]
+        - img "closed up blur tree of forest" [ref=e177]
+    - generic [ref=e181]:
+      - heading "3. Developing your project" [level=4] [ref=e182]
+      - paragraph [ref=e183]:
+        - text: After the design approval, begins the development phase where the drawings will be transformed into
+        - strong [ref=e184]: a real product
+        - text: . Your project will be created using
+        - strong [ref=e185]: the most suitable technology
+        - text: and you will have the opportunity to test and give feedback during the whole phase. This will guarantee a
+        - strong [ref=e186]: fast and smooth collaboration
+        - text: of the whole web development process.
+    - generic [ref=e192]:
+      - heading "Check my latest projects" [level=2] [ref=e194]: Check my latestprojects
+      - link "Explore more projects" [ref=e196] [cursor=pointer]:
+        - /url: https://code-master.be/explore
+    - generic [ref=e199]:
+      - img "preview of mywaypro project made my code master" [ref=e202]
+      - generic [ref=e203]:
+        - heading "mywaypro" [level=4] [ref=e204]
+        - paragraph [ref=e205]:
+          - text: Due to the
+          - strong [ref=e206]: minimalist design and flexibility
+          - text: ", illustrations have become more and more used nowadays. MyWay Pro is a project designed and coded by me"
+          - strong [ref=e207]: using the latest technologies
+          - text: . In addition to the minimalist look and corporate seriousness, this project also has a very strong
+          - strong [ref=e208]: SEO
+          - text: structure.
+        - link "See details" [ref=e210] [cursor=pointer]:
+          - /url: https://code-master.be/explore/mywaypro
+    - img "closed up blur tree of forest" [ref=e211]
+    - generic [ref=e214]:
+      - generic [ref=e215]:
+        - heading "trimiday" [level=4] [ref=e216]
+        - paragraph [ref=e217]:
+          - text: Collaboration with the fantastic team from
+          - strong [ref=e218]: TripleTwin
+          - text: to design the full UI and develop the new Trimiday app. Trimiday is an application that makes the
+          - strong [ref=e219]: ads more interesting
+          - text: by simply rewarding you for looking at them
+        - link "See details" [ref=e221] [cursor=pointer]:
+          - /url: https://code-master.be/explore/trimiday
+      - img "preview of trimiday project made my code master" [ref=e224]
+    - generic [ref=e227]:
+      - img "preview of codemaster project made my code master" [ref=e230]
+      - generic [ref=e231]:
+        - heading "codemaster" [level=4] [ref=e232]
+        - paragraph [ref=e233]:
+          - text: Sometimes, the place where you can show all your creativity is your own project. CodeMaster is the branding created by me since my college years and is still
+          - strong [ref=e234]: one of my most creative projects
+          - text: with a unique and special reputation for me. This name represents my
+          - strong [ref=e235]: passion for design and programming
+          - text: . Enjoy!
+        - link "See details" [ref=e237] [cursor=pointer]:
+          - /url: https://code-master.be/explore/codemaster
+  - contentinfo [ref=e238]:
+    - img "footer top shape" [ref=e239]
+    - generic [ref=e240]:
+      - generic [ref=e241]:
+        - generic [ref=e242]:
+          - heading "Are you ready to start?" [level=5] [ref=e243]: Are you readyto start?
+          - paragraph [ref=e244]:
+            - text: Let's talk about it!
+            - link "Contact me" [ref=e245] [cursor=pointer]:
+              - /url: /contact
+          - paragraph [ref=e246]:
+            - text: "Explore our tools:"
+            - link "Free AI Background Remover" [ref=e247] [cursor=pointer]:
+              - /url: https://free-background-remover.com
+            - text: ","
+            - link "Privacy-first Audio Remover" [ref=e248] [cursor=pointer]:
+              - /url: https://remove-audio.com
+            - text: ","
+            - link "HEIC to JPG Converter" [ref=e249] [cursor=pointer]:
+              - /url: https://fromheictojpg.com
+            - text: ","
+            - link "Bytes of Us" [ref=e250] [cursor=pointer]:
+              - /url: https://bytesofus.com
+        - generic [ref=e251]:
+          - heading "pages" [level=6] [ref=e252]
+          - list [ref=e253]:
+            - listitem [ref=e254]:
+              - link "welcome" [ref=e255] [cursor=pointer]:
+                - /url: https://code-master.be
+            - listitem [ref=e256]:
+              - link "discover" [ref=e257] [cursor=pointer]:
+                - /url: https://code-master.be/discover
+            - listitem [ref=e258]:
+              - link "explore" [ref=e259] [cursor=pointer]:
+                - /url: https://code-master.be/explore
+            - listitem [ref=e260]:
+              - link "contact" [ref=e261] [cursor=pointer]:
+                - /url: https://code-master.be/contact
+        - generic [ref=e262]:
+          - heading "languages" [level=6] [ref=e263]
+          - list [ref=e264]:
+            - listitem [ref=e265]:
+              - link "english" [ref=e266] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e267]:
+              - link "romanian" [ref=e268] [cursor=pointer]:
+                - /url: /ro
+      - generic [ref=e269]:
+        - generic [ref=e270]:
+          - heading "CodeMaster." [level=6] [ref=e272]
+          - paragraph [ref=e274]: All rights reserved - 2026
+        - list [ref=e276]:
+          - listitem [ref=e277]:
+            - link [ref=e278] [cursor=pointer]:
+              - /url: https://www.instagram.com/iamcodemaster/
+              - img "instagram" [ref=e279]
+          - listitem [ref=e280]:
+            - link [ref=e281] [cursor=pointer]:
+              - /url: https://www.facebook.com/iamcodemaster
+              - img "facebook" [ref=e282]
+          - listitem [ref=e283]:
+            - link [ref=e284] [cursor=pointer]:
+              - /url: https://github.com/iamcodemaster
+              - img "github" [ref=e285]
+          - listitem [ref=e286]:
+            - link [ref=e287] [cursor=pointer]:
+              - /url: https://dribbble.com/iamcodemaster
+              - img "dribbble" [ref=e288]
+    - img "home footer decoration" [ref=e289]
+    - img "home footer decoration" [ref=e290]

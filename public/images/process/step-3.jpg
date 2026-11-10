@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1917" />
+      <stop offset="100%" stop-color="#292524" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)" />
+  <circle cx="400" cy="250" r="80" fill="url(#accent)" opacity="0.15" />
+  <text x="400" y="260" font-family="system-ui, sans-serif" font-size="48" fill="url(#accent)" text-anchor="middle">3</text>
+  <text x="400" y="380" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#f8fafc" text-anchor="middle">Developing</text>
+  <text x="400" y="420" font-family="system-ui, sans-serif" font-size="16" fill="#d6d3d1" text-anchor="middle">Tech Stack, Testing & Collaboration</text>
+  <g fill="url(#accent)" opacity="0.3">
+    <path d="M200 500 L250 450 L300 500 L250 470 Z" />
+    <path d="M380 500 L430 450 L480 500 L430 470 Z" />
+    <path d="M560 500 L610 450 L660 500 L610 470 Z" />
+  </g>
+</svg>

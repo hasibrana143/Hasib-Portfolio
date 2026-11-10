@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="mountainGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3f3f46" />
+      <stop offset="100%" stop-color="#27272a" />
+    </linearGradient>
+    <linearGradient id="mountainGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#52525b" />
+      <stop offset="100%" stop-color="#3f3f46" />
+    </linearGradient>
+    <linearGradient id="mountainGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#71717a" />
+      <stop offset="100%" stop-color="#52525b" />
+    </linearGradient>
+  </defs>
+  <path d="M0 800 L200 650 L400 720 L600 600 L800 700 L1000 580 L1200 680 L1400 550 L1600 650 L1800 500 L1920 520 L1920 1080 L0 1080 Z" fill="url(#mountainGradient1)" opacity="0.8" />
+  <path d="M0 850 L150 700 L350 780 L550 650 L750 750 L950 620 L1150 730 L1350 600 L1550 700 L1750 550 L1920 580 L1920 1080 L0 1080 Z" fill="url(#mountainGradient2)" opacity="0.6" />
+  <path d="M0 900 L100 780 L300 850 L500 720 L700 820 L900 680 L1100 780 L1300 650 L1500 750 L1700 600 L1920 630 L1920 1080 L0 1080 Z" fill="url(#mountainGradient3)" opacity="0.4" />
+</svg>
