@@ -174,48 +174,50 @@ export function ProjectsSection() {
 
 function ProjectCard({ project, index, onClick }: { project: typeof projects[0]; index: number; onClick: () => void }) {
   return (
-    <motion.article
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      onClick={onClick}
-      className="group relative cursor-pointer"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onClick()}
-      role="button"
-      aria-label={`View ${project.title} project details`}
+      className="group relative"
     >
       <Card className="h-full overflow-hidden transition-shadow hover:shadow-xl">
-        <div className="aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-800">
-          <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-            {project.image}
+        <button
+          onClick={onClick}
+          onKeyDown={(e) => e.key === "Enter" && onClick()}
+          className="w-full h-full p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          aria-label={`View ${project.title} project details`}
+        >
+          <div className="aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-800">
+            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
+              {project.image}
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        </div>
-        <CardContent className="p-6">
-          <div className="mb-3 flex flex-wrap gap-1">
-            {project.techStack.slice(0, 3).map((tech) => (
-              <Badge key={tech} variant="outline" className="text-xs">
-                {tech}
-              </Badge>
-            ))}
-            {project.techStack.length > 3 && (
-              <Badge variant="outline" className="text-xs">
-                +{project.techStack.length - 3}
-              </Badge>
-            )}
-          </div>
-          <h3 className="mb-2 text-xl font-semibold group-hover:text-primary transition-colors">
-            {project.title}
-          </h3>
-          <p className="text-sm text-muted-foreground line-clamp-2">{project.shortDescription}</p>
-        </CardContent>
-        <CardFooter className="flex items-center justify-between p-6 pt-0">
-          <span className="text-xs text-muted-foreground capitalize">{project.category}</span>
-          <span className="text-sm font-medium text-primary group-hover:underline">View Details</span>
-        </CardFooter>
+          <CardContent className="p-6">
+            <div className="mb-3 flex flex-wrap gap-1">
+              {project.techStack.slice(0, 3).map((tech) => (
+                <Badge key={tech} variant="outline" className="text-xs">
+                  {tech}
+                </Badge>
+              ))}
+              {project.techStack.length > 3 && (
+                <Badge variant="outline" className="text-xs">
+                  +{project.techStack.length - 3}
+                </Badge>
+              )}
+            </div>
+            <h3 className="mb-2 text-xl font-semibold group-hover:text-primary transition-colors">
+              {project.title}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-2">{project.shortDescription}</p>
+          </CardContent>
+          <CardFooter className="flex items-center justify-between p-6 pt-0">
+            <span className="text-xs text-muted-foreground capitalize">{project.category}</span>
+            <span className="text-sm font-medium text-primary group-hover:underline">View Details</span>
+          </CardFooter>
+        </button>
       </Card>
-    </motion.article>
+    </motion.div>
   );
 }

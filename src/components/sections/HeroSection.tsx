@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { ArrowRight, Code, Terminal, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +12,16 @@ interface HeroProps {
 }
 
 export function Hero({ name, title, description }: HeroProps) {
+  const router = useRouter();
+
+  const scrollToSection = (href: string) => {
+    const id = href.replace("#", "");
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="relative z-10 w-full max-w-7xl px-6 py-20">
@@ -63,17 +74,22 @@ export function Hero({ name, title, description }: HeroProps) {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
           >
-            <Button size="lg" asChild>
-              <a href="#projects" className="flex items-center gap-2">
-                View Projects
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+            <Button
+              size="lg"
+              onClick={() => scrollToSection("#projects")}
+              className="w-full sm:w-auto"
+            >
+              View Projects
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="#contact" className="flex items-center gap-2">
-                Get In Touch
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => scrollToSection("#contact")}
+              className="w-full sm:w-auto"
+            >
+              Get In Touch
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </Button>
           </motion.div>
 
