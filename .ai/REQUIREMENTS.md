@@ -1,103 +1,65 @@
-# Requirements: CodeMaster-Inspired Portfolio
+# Requirements: Full-Stack Developer Portfolio
 
 ## Functional Requirements
 
-### FR-01: Navigation
-- Fixed/sticky header with logo and navigation links
-- Links: Welcome (Home), Discover, Explore, Contact
-- Mobile hamburger menu
-- Smooth scroll to sections
+### FR-001: Hero Section
+- **Description**: Eye-catching hero with name, title, tagline, CTA buttons
+- **Acceptance**: Loads in <1s, accessible, responsive
 
-### FR-02: Hero Section (Parallax Forest)
-- Multi-layer parallax background (sun, mountains, clouds ×3, forest layers ×4)
-- Animated entrance for layers
-- "web design & development" headline with creative typography
-- Scroll-triggered parallax movement
+### FR-002: About Section
+- **Description**: Brief bio, skills, tech stack, experience timeline
+- **Acceptance**: Scannable, keyword-rich for SEO
 
-### FR-03: About/CTA Section
-- Headline: "Need a freelance web designer for your website?"
-- Descriptive paragraph about freelance services
-- CTA button: "Let's get started" → Contact page
-- Workspace imagery with forest elements
+### FR-003: Projects Showcase
+- **Description**: Grid of 4-6 featured projects with images, descriptions, tech tags, live/demo links, GitHub links
+- **Acceptance**: Filterable by tech, modal/detail view, accessible images
 
-### FR-04: Process Section (3 Steps)
-- Step 1: "Understanding your idea" - vision, goals, business dreams
-- Step 2: "Crafting a stunning design" - branding, UX/UI, simplicity
-- Step 3: "Developing your project" - suitable tech, testing, collaboration
-- Visual forest elements between steps
-- Staggered scroll animations
+### FR-004: Skills/Tech Stack
+- **Description**: Categorized skills (Frontend, Backend, Database, DevOps, Tools)
+- **Acceptance**: Visual icons, proficiency indicators
 
-### FR-05: Projects Showcase
-- Section headline: "Check my latest projects"
-- Link: "Explore more projects" → Explore page
-- Project cards with:
-  - Preview image
-  - Project title
-  - Description with highlighted key points
-  - "See details" link
-- Featured projects: mywaypro, trimiday, codemaster (placeholder data)
+### FR-005: Contact Form
+- **Description**: Name, email, subject, message with validation
+- **Acceptance**: Server-side validation, spam protection, success/error states
 
-### FR-06: Footer
-- CTA: "Are you ready to start?" with contact link
-- "Explore our tools" links (external tools)
-- Navigation links (Welcome, Discover, Explore, Contact)
-- Language selector (English, Romanian)
-- Copyright: "CodeMaster. All rights reserved - 2026"
-- Social links: Instagram, Facebook, GitHub, Dribbble
-- Decorative forest elements
-
-### FR-07: Additional Pages
-- **Discover Page**: About/services detail
-- **Explore Page**: Full project gallery with filtering
-- **Contact Page**: Contact form + info
-- **Project Detail Pages**: Individual project case studies
+### FR-006: Footer
+- **Description**: Social links, copyright, navigation
+- **Acceptance**: Accessible links, responsive
 
 ## Non-Functional Requirements
 
-### NFR-01: Performance
-- LCP < 2.5s
-- CLS < 0.1
-- INP < 200ms
-- Bundle size < 200KB gzipped (first load)
-- Images optimized (WebP, responsive sizes)
+### NFR-001: Performance
+- **Target**: LCP < 2.5s, INP < 200ms, CLS < 0.1
+- **Bundle**: < 100KB JS gzipped
 
-### NFR-02: Accessibility (WCAG 2.1 AA)
-- Semantic HTML structure
-- Keyboard navigation
-- Focus indicators
-- Alt text for all images
-- Color contrast ≥ 4.5:1
-- Reduced motion support
-- Screen reader friendly
+### NFR-002: Accessibility
+- **Target**: WCAG 2.1 AA compliant
+- **Keyboard**: Full navigation
+- **Screen reader**: Semantic HTML, ARIA where needed
 
-### NFR-03: Code Quality
-- TypeScript strict mode
-- ESLint + Prettier passing
-- No console errors/warnings
-- Component-driven architecture
+### NFR-003: SEO
+- **Target**: 100/100 Lighthouse SEO
+- **Meta**: Open Graph, Twitter Cards, JSON-LD schema
 
-### NFR-04: Browser Support
-- Modern browsers (last 2 versions)
-- Safari, Chrome, Firefox, Edge
+### NFR-004: Security
+- **Headers**: CSP, HSTS, X-Frame-Options
+- **Forms**: Rate limiting, CSRF protection
 
-### NFR-05: SEO
-- Meta tags (title, description, OG, Twitter)
-- Semantic heading hierarchy
-- Structured data (Person, WebSite)
-- Sitemap.xml
-- robots.txt
+### NFR-005: Maintainability
+- **Content**: Data-driven (JSON/MDX), not hardcoded
+- **Images**: Optimized, WebP/AVIF, responsive
 
-## Acceptance Criteria
-
-| ID | Criteria | Verification |
-|----|----------|--------------|
-| AC-01 | Hero parallax works smoothly on scroll | Visual test + performance audit |
-| AC-02 | All navigation links work | Manual click test |
-| AC-03 | Mobile menu functions | Device test |
-| AC-04 | Process section animates on scroll | IntersectionObserver test |
-| AC-05 | Project cards display correctly | Visual regression |
-| AC-06 | Footer links navigate correctly | Link checker |
-| AC-07 | Lighthouse score ≥ 90 all categories | Lighthouse CI |
-| AC-08 | No TypeScript errors | `tsc --noEmit` |
-| AC-09 | No ESLint errors | `npm run lint` |
-| AC-10 | Axe-core accessibility score 0 violations | Automated a11y test |
+## Acceptance Criteria Summary
+| ID | Requirement | Verification |
+|----|-------------|--------------|
+| FR-001 | Hero loads <1s | Lighthouse/Playwright |
+| FR-002 | About scannable | Manual review |
+| FR-003 | Projects filterable | E2E test |
+| FR-004 | Skills categorized | Visual check |
+| FR-005 | Contact validates | Unit + E2E test |
+| FR-006 | Footer accessible | axe-core |
+| NFR-001 | Core Web Vitals pass | Lighthouse CI |
+| NFR-002 | WCAG AA | axe-core + manual |
+| NFR-003 | SEO 100 | Lighthouse |
+| NFR-004 | Security headers | securityheaders.com |
+| NFR-005 | Data-driven | Code review |

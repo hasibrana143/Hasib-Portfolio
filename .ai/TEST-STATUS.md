@@ -1,35 +1,47 @@
-# Test Status
+# Test Status: Full-Stack Developer Portfolio
 
-## Test Suite Status
+## Test Strategy
+| Layer | Tool | Coverage Target | Status |
+|-------|------|-----------------|--------|
+| Unit | Vitest | 80% utils/hooks | NOT_STARTED |
+| Integration | Vitest + MSW | Server Actions, API | NOT_STARTED |
+| E2E | Playwright | Critical user paths | NOT_STARTED |
+| Accessibility | axe-core + Playwright | 0 violations | NOT_STARTED |
+| Visual | Playwright screenshots | Key pages | NOT_STARTED |
+| Performance | Lighthouse CI | Budgets met | NOT_STARTED |
 
-| Suite | Status | Last Run | Pass Rate | Coverage |
-|-------|--------|----------|-----------|----------|
-| Unit (Vitest) | ⏳ Not Run | - | - | - |
-| Integration | ⏳ Not Run | - | - | - |
-| E2E (Playwright) | ⏳ Not Run | - | - | - |
-| Accessibility (axe-core) | ⏳ Not Run | - | - | - |
-| Performance (Lighthouse) | ⏳ Not Run | - | - | - |
-| Visual Regression | ⏳ Not Run | - | - | - |
+## Test Commands
+```bash
+# Unit + Integration
+npm run test
 
-## Test Evidence Log
+# E2E
+npm run test:e2e
 
-| Date | Suite | Command | Exit Code | Duration | Output |
-|------|-------|---------|-----------|----------|--------|
-| 2026-11-10 | Typecheck | `npm run typecheck` | 0 | 3.0s | Clean - no errors |
-| 2026-11-10 | Lint | `npm run lint` | 0 | 2.1s | Clean - no errors/warnings |
-| 2026-11-10 | Build | `npm run build` | 0 | ~15s | 12 pages generated |
+# Accessibility
+npm run test:a11y
+
+# Lighthouse
+npm run lighthouse
+```
+
+## Current Results
+| Suite | Pass | Fail | Skip | Duration | Last Run |
+|-------|------|------|------|----------|----------|
+| Unit | - | - | - | - | Never |
+| Integration | - | - | - | - | Never |
+| E2E | - | - | - | - | Never |
+| Accessibility | - | - | - | - | Never |
+| Lighthouse | - | - | - | - | Never |
 
 ## Quality Gates
-
-| Gate | Target | Current | Status |
-|------|--------|---------|--------|
-| TypeScript | 0 errors | 0 | ✅ PASS |
-| ESLint | 0 errors | 0 | ✅ PASS |
-| Prettier | 0 warnings | 0 | ✅ PASS |
-| Unit Tests | 100% pass | - | ⏳ |
-| E2E Tests | 100% pass | - | ⏳ |
-| A11y Critical | 0 violations | - | ⏳ |
-| Lighthouse Perf | ≥ 90 | - | ⏳ |
-| Lighthouse A11y | ≥ 90 | - | ⏳ |
-| Lighthouse Best Practices | ≥ 90 | - | ⏳ |
-| Lighthouse SEO | ≥ 90 | - | ⏳ |
+- [ ] All unit tests pass
+- [ ] All integration tests pass
+- [ ] All E2E tests pass
+- [ ] 0 accessibility violations (critical/high)
+- [ ] Lighthouse Performance ≥ 90
+- [ ] Lighthouse Accessibility = 100
+- [ ] Lighthouse SEO = 100
+- [ ] Bundle size < 100KB JS gzipped
+- [ ] TypeScript strict mode passes
+- [ ] ESLint passes (0 errors, 0 warnings)

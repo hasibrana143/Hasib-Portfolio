@@ -1,37 +1,31 @@
-# Project: CodeMaster-Inspired Portfolio
+# Project: Full-Stack Developer Portfolio
 
 ## Classification
-- **Type**: Personal Portfolio / Freelance Showcase Website
-- **Stack**: Next.js 14+ (App Router), TypeScript, Tailwind CSS, Framer Motion
+- **Type**: Personal Portfolio Website
+- **Stack**: Next.js 15 (App Router), TypeScript, Tailwind CSS
 - **Package Manager**: npm
-- **Deployment**: Vercel (static export or SSR)
-- **Database**: None required (static content)
-- **Auth**: None required
-- **APIs**: None required (static portfolio)
+- **Frontend**: React 19, Next.js App Router
+- **Backend**: Next.js API Routes / Server Actions
+- **Database**: None (static content + optional CMS later)
+- **Auth**: None (public portfolio)
+- **Deployment**: Vercel (recommended)
+- **Testing**: Playwright (E2E), Vitest (unit)
 
-## Target Reference
-- **Reference Site**: https://code-master.be/
-- **Goal**: Create a portfolio with similar structure, forest/nature theme, parallax effects, and creative freelance positioning
+## Goals
+- Showcase full-stack development skills
+- Display projects with live demos and code links
+- Professional contact form
+- Fast, accessible, SEO-optimized
+- Easy to maintain and update
 
-## Key Features from Reference
-1. **Navigation**: Welcome, Discover, Explore, Contact
-2. **Hero**: Parallax forest scene with layered images (sun, mountains, clouds, forest layers)
-3. **About/CTA**: "Need a freelance web designer?" with contact CTA
-4. **Process**: 3-step process (Understanding → Designing → Developing)
-5. **Projects Showcase**: Latest projects with cards (image + description + link)
-6. **Footer**: CTA, navigation, languages, social links, copyright
-
-## Technical Requirements
-- Responsive design (mobile-first)
-- Smooth parallax scrolling effects
-- Accessible (WCAG AA)
-- Performant (Core Web Vitals optimized)
-- Type-safe (TypeScript strict)
-- Linted (ESLint + Prettier)
+## Users
+- Potential employers/clients
+- Fellow developers
+- Recruiters
 
 ## Constraints
-- No backend/database needed
-- Static content management (MDX or JSON for projects)
-- Forest/nature visual theme
-- Parallax layers for hero
-- Creative, non-template feel
+- Must be fast (Core Web Vitals green)
+- Must be accessible (WCAG AA)
+- Must work without JS (progressive enhancement)
+- Low maintenance - static-first
+- Free/cheap hosting

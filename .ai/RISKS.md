@@ -1,21 +1,26 @@
-# Risk Assessment
+# Risks: Full-Stack Developer Portfolio
 
-| Probability | Impact | Rating | Risk | Mitigation | Action |
-|-------------|--------|--------|------|------------|--------|
-| High | High | 🔴 CRITICAL | Parallax performance on mobile | Test early, implement reduced motion, optimize layer count | Prototype parallax in Phase 2, test on low-end devices |
-| High | Medium | 🟠 HIGH | Forest images not available/licensed | Use AI-generated or royalty-free assets, create custom SVG alternatives | Source assets in Phase 2, have fallback plan |
-| Medium | High | 🟠 HIGH | Framer Motion bundle size impact | Tree-shake imports, use only needed features, measure bundle | Audit bundle after Phase 2, consider lighter alternatives |
-| Medium | Medium | 🟡 MEDIUM | Scroll animations cause motion sickness | Respect `prefers-reduced-motion`, provide disable toggle | Implement in Phase 2, test with accessibility users |
-| Low | High | 🟡 MEDIUM | Next.js static export limitations | Verify all routes pre-generate, avoid dynamic APIs | Test build early in Phase 0 |
-| Medium | Low | 🟢 LOW | Design doesn't match reference exactly | Iterative design review, reference screenshots comparison | Design review gate in Phase 7 |
-| Low | Medium | 🟢 LOW | Contact form spam | Use Formspree honeypot, rate limiting | Configure in Phase 6 |
-| Low | Low | 🟢 LOW | Browser compatibility issues | Test in CI with Playwright across browsers | Add to Phase 7 |
+## Risk Matrix
 
-## Risk Triggers & Escalation
+| ID | Risk | Probability | Impact | Rating | Mitigation |
+|----|------|-------------|--------|--------|------------|
+| R-001 | Content not ready (projects, bio, images) | High | High | 🔴 CRITICAL | Request content upfront; use placeholders |
+| R-002 | Contact form email delivery fails | Medium | High | 🟠 HIGH | Test Resend thoroughly; fallback to Formspree |
+| R-003 | Vercel deployment issues (build failures) | Low | High | 🟡 MEDIUM | Test build locally first; check Node version |
+| R-004 | Accessibility regressions during development | Medium | Medium | 🟡 MEDIUM | axe-core in CI; manual keyboard testing |
+| R-005 | Performance budget exceeded | Medium | Medium | 🟡 MEDIUM | Bundle analyzer; Lighthouse CI on PRs |
+| R-006 | Images not optimized / large bundle | Medium | Medium | 🟡 MEDIUM | next/image config; WebP/AVIF; lazy loading |
+| R-007 | SEO issues (missing meta, schema) | Low | Medium | 🟢 LOW | Automated meta generation; schema validation |
+| R-008 | Theme flash on load | Low | Low | 🟢 LOW | next-themes with `attribute="class"`; inline script |
+| R-009 | Browser compatibility issues | Low | Medium | 🟢 LOW | Test in Chrome, Firefox, Safari; polyfills if needed |
+| R-010 | Scope creep (adding blog, CMS, etc.) | High | Medium | 🟠 HIGH | Strict MVP scope; Phase 2 backlog |
 
-| Trigger | Escalation |
-|---------|------------|
-| Parallax FPS < 30 on mobile | Simplify layers, switch to CSS-only parallax |
-| Bundle size > 250KB | Remove Framer Motion, use CSS animations |
-| Lighthouse < 80 | Audit and optimize images, fonts, third-party |
-| Accessibility violations > 0 | Fix before merge, block PR |
+## Risk Triggers
+- **R-001**: No project data provided by 2026-11-13 → Use placeholder data, flag for owner
+- **R-002**: Resend test email fails → Switch to Formspree immediately
+- **R-003**: Local build fails → Fix before push; don't rely on CI to catch
+
+## Contingency Plans
+- If Vercel fails: Deploy to Netlify/Cloudflare Pages as backup
+- If Resend fails: Formspree free tier (50 submissions/month)
+- If performance fails: Remove animations, reduce images, code-split more

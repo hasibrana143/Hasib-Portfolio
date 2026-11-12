@@ -2,13 +2,12 @@
 
 | Date | Decision | Rationale | Alternatives Considered |
 |------|----------|-----------|-------------------------|
-| 2026-11-10 | Next.js 14 App Router with static export | Best performance, free hosting, native image/font optimization | Astro, Vite+React, Remix |
-| 2026-11-10 | Framer Motion for animations | Declarative, scroll-triggered, layout animations, reduced motion support | GSAP, CSS animations, react-spring |
-| 2026-11-10 | Custom parallax implementation | Full control over layer behavior, performance tuning | react-parallax, simple-parallax, CSS-only |
-| 2026-11-10 | Content as TypeScript modules | Type safety, version control, zero dependencies | Headless CMS (Contentful, Sanity), MDX |
-| 2026-11-10 | Tailwind CSS with custom theme | Design tokens, consistency, minimal CSS | CSS Modules, Styled Components, vanilla CSS |
-| 2026-11-10 | Vercel for deployment | Native Next.js support, edge network, preview deployments | Netlify, Cloudflare Pages, AWS Amplify |
-| 2026-11-10 | No backend/database | Portfolio is static content, no user accounts needed | Supabase, Firebase, custom API |
-| 2026-11-10 | Contact form via Formspree | No server needed, spam protection, email delivery | EmailJS, Netlify Forms, custom API |
-| 2026-11-10 | Lucide React for icons | Tree-shakeable, consistent style, accessible | Heroicons, Phosphor, custom SVG |
-| 2026-11-10 | Vitest + Playwright for testing | Fast unit tests, real browser E2E | Jest + Cypress, pure Playwright |
+| 2026-11-12 | Next.js 15 App Router | RSC, streaming, Edge runtime, best perf | Astro (less RSC), Remix (no Edge yet) |
+| 2026-11-12 | Tailwind CSS v4 | Native CSS cascade, smaller bundle, design tokens | CSS Modules, Styled Components, UnoCSS |
+| 2026-11-12 | shadcn/ui for components | Accessible, copy-paste ownership, no runtime | Radix UI directly, Headless UI, MUI |
+| 2026-11-12 | Framer Motion for animations | Performant, gestures, reduced-motion support | CSS animations, GSAP (heavier) |
+| 2026-11-12 | Resend for contact form | DevEx, deliverability, React Email templates | Formspree, EmailJS, Nodemailer |
+| 2026-11-12 | Vercel deployment | Zero-config Edge, preview deploys, analytics | Netlify, Cloudflare Pages, AWS Amplify |
+| 2026-11-12 | Data-driven content (TS files) | Type-safe, version-controlled, no CMS needed | MDX, Contentful, Sanity, Notion API |
+| 2026-11-12 | Lucide React icons | Tree-shakeable, consistent, lightweight | React Icons (larger), Heroicons |
+| 2026-11-12 | React Hook Form + Zod | Type-safe validation, minimal bundle | Formik + Yup, native HTML validation |
