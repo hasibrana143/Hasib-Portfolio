@@ -1,6 +1,5 @@
 import { MetadataRoute } from "next";
-
-export const dynamic = "force-static";
+import { siteConfig } from "@/data/constants";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/_next/", "/static/"],
     },
-    sitemap: "https://code-master.be/sitemap.xml",
+    sitemap: `${siteConfig.url}/sitemap.xml`,
+    host: siteConfig.url,
   };
 }

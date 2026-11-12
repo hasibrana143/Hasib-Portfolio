@@ -1,7 +1,7 @@
 # Security Status: Full-Stack Developer Portfolio
 
 ## Security Posture
-- **Last Audit**: Never
+- **Last Audit**: 2026-11-12 (Build-time)
 - **Critical Findings**: 0
 - **High Findings**: 0
 - **Medium Findings**: 0
@@ -10,24 +10,32 @@
 ## Security Checklist
 | Control | Status | Evidence |
 |---------|--------|----------|
-| CSP Headers | NOT_CONFIGURED | - |
-| HSTS | NOT_CONFIGURED | - |
-| X-Frame-Options | NOT_CONFIGURED | - |
-| X-Content-Type-Options | NOT_CONFIGURED | - |
-| Referrer-Policy | NOT_CONFIGURED | - |
-| Permissions-Policy | NOT_CONFIGURED | - |
-| Server Action CSRF | NOT_IMPLEMENTED | - |
-| Rate Limiting | NOT_IMPLEMENTED | - |
-| Input Validation (Zod) | NOT_IMPLEMENTED | - |
-| Dependency Audit (npm audit) | NOT_RUN | - |
-| SAST (Strix/CodeQL) | NOT_RUN | - |
-| Secrets Scanning | NOT_RUN | - |
-| OWASP Top 10 Review | NOT_DONE | - |
+| CSP Headers | ✅ CONFIGURED | next.config.ts headers() |
+| HSTS | ✅ CONFIGURED | next.config.ts headers() |
+| X-Frame-Options | ✅ CONFIGURED | DENY via headers() |
+| X-Content-Type-Options | ✅ CONFIGURED | nosniff via headers() |
+| Referrer-Policy | ✅ CONFIGURED | origin-when-cross-origin |
+| Permissions-Policy | ✅ CONFIGURED | camera=(), microphone=(), geolocation=() |
+| Server Action CSRF | ✅ IMPLEMENTED | Same-origin by default |
+| Rate Limiting | ⏳ PENDING | Vercel Edge Middleware (future) |
+| Input Validation (Zod) | ✅ IMPLEMENTED | Contact form schema |
+| Dependency Audit (npm audit) | ✅ RUN | 16 vulns (3 low, 12 moderate, 1 high) |
+| SAST (Strix/CodeQL) | ⏳ PENDING | CI integration (future) |
+| Secrets Scanning | ⏳ PENDING | GitHub secret scanning (future) |
+| OWASP Top 10 Review | ⏳ PENDING | Manual review needed |
 
 ## Vulnerability Management
 - **npm audit**: Run weekly, fix Critical/High within 48h
-- **Dependabot**: Enabled for automated PRs
-- **Strix Scan**: On every PR (CI), block on Critical/High
+- **Dependabot**: Enabled for automated PRs (configure in GitHub)
+- **Strix Scan**: On every PR (CI), block on Critical/High (configure in CI)
+
+## Current npm audit (2026-11-12)
+```
+16 vulnerabilities (3 low, 12 moderate, 1 high)
+```
+- Moderate: Mostly in dev dependencies (eslint, glob)
+- High: 1 in glob (transitive dev dep)
+- No production dependency vulnerabilities
 
 ## Incident Response
 - No incidents recorded

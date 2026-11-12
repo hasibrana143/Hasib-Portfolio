@@ -1,53 +1,35 @@
-export interface NavItem {
-  label: string;
-  href: string;
-}
-
-export interface SocialLink {
-  label: string;
-  href: string;
-  icon: string;
-}
-
 export interface Project {
   id: string;
   title: string;
   description: string;
-  highlights: string[];
+  shortDescription: string;
   image: string;
-  imageAlt: string;
-  technologies: string[];
-  link: string;
+  techStack: string[];
+  liveUrl?: string;
+  githubUrl?: string;
   featured: boolean;
+  category: "fullstack" | "frontend" | "backend" | "mobile";
 }
 
-export interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
-  highlights: string[];
+export interface Skill {
+  name: string;
+  category: "frontend" | "backend" | "database" | "devops" | "tools";
+  proficiency: number; // 1-5
+  icon?: string;
+}
+
+export interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
 }
 
 export interface SiteConfig {
   name: string;
+  title: string;
   description: string;
   url: string;
   ogImage: string;
-  author: {
-    name: string;
-    location: string;
-    role: string;
-  };
-  navigation: NavItem[];
-  social: SocialLink[];
-  languages: { label: string; href: string }[];
-  footerTools: { label: string; href: string }[];
-}
-
-export interface SEOProps {
-  title: string;
-  description: string;
-  image?: string;
-  url?: string;
-  type?: "website" | "article";
+  email: string;
+  socialLinks: SocialLink[];
 }

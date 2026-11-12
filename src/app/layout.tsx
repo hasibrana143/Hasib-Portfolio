@@ -1,65 +1,83 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/data/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap",
-  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-  display: "swap",
 });
 
-export const metadataBase = new URL("https://code-master.be");
-
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "CodeMaster - Freelance Web Design & Development from Belgium",
-    template: "%s | CodeMaster",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: "Creative freelance designer and developer based in Antwerp, Belgium. 5+ years of experience crafting modern websites with beautiful code.",
-  keywords: ["freelance web designer", "web developer", "Antwerp", "Belgium", "web design", "web development", "portfolio"],
-  authors: [{ name: "CodeMaster", url: "https://code-master.be" }],
-  creator: "CodeMaster",
-  publisher: "CodeMaster",
-  robots: "index, follow",
+  description: siteConfig.description,
+  keywords: [
+    "Full-Stack Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Portfolio",
+    "Web Developer",
+    "Software Engineer",
+  ],
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://code-master.be",
-    siteName: "CodeMaster",
-    title: "CodeMaster - Freelance Web Design & Development",
-    description: "Creative freelance designer and developer based in Antwerp, Belgium.",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "CodeMaster Portfolio",
+        alt: `${siteConfig.name} - Full-Stack Developer`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CodeMaster - Freelance Web Design & Development",
-    description: "Creative freelance designer and developer based in Antwerp, Belgium.",
-    images: ["/images/og-image.jpg"],
-    creator: "@iamcodemaster",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: "@yourusername",
   },
   verification: {
-    google: "google-site-verification-code",
+    google: "your-google-verification-code",
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#030712" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -68,21 +86,32 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
-      <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-emerald-600 text-white rounded-lg"
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          Skip to main content
-        </a>
-        {children}
+          <Header />
+          <main id="main-content" className="flex-1 pt-16">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

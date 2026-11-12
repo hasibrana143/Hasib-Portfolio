@@ -1,10 +1,12 @@
 "use client";
 
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
-import { navigation } from "@/lib/constants";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
+import { navLinks } from "@/data/constants";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,104 +16,110 @@ export function Header() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
+    <motion.header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "bg-white/90 dark:bg-gray-950/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+        scrolled ? "bg-background/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
       )}
-      role="banner"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link
-            href="/"
-            className="text-xl font-bold text-gray-900 dark:text-white"
-            aria-label="CodeMaster - Home"
+      <nav
+        className="mx-auto max-w-7xl px-6"
+        aria-label="Main navigation"
+      >
+        <div className="flex h-16 items-center justify-between">
+          <motion.a
+            href="#"
+            className="text-xl font-bold"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            CodeMaster
-          </Link>
+            Portfolio
+          </motion.a>
 
-          <div className="hidden lg:flex items-center gap-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+          <div className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                whileHover={{ y: -2 }}
               >
-                {item.label}
-              </Link>
+                {link.label}
+              </motion.a>
             ))}
+            <ThemeToggle />
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <Link href="/contact">
-              <Button variant="primary" size="sm">
-                Contact
-              </Button>
-            </Link>
+          <div className="flex items-center gap-4 md:hidden">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
           </div>
-
-          <button
-            className="lg:hidden p-2 text-gray-700 dark:text-gray-300"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
         </div>
 
-        {mobileMenuOpen && (
-          <div id="mobile-menu" className="lg:hidden py-4 border-t border-gray-200 dark:border-gray-800 animate-slideDown">
-            <div className="flex flex-col gap-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="primary" className="w-full justify-center mt-2">
-                  Contact
-                </Button>
-              </Link>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden overflow-hidden bg-background border-t"
+            >
+              <div className="py-4 space-y-2">
+                {navLinks.map((link) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    className="block px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
+    </motion.header>
+  );
+}
 
-      <style jsx>{`
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-slideDown {
-          animation: slideDown 0.2s ease-out;
-        }
-      `}</style>
-    </header>
+function ThemeToggle() {
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!mounted) return <div className="w-10 h-10" />;
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
+    >
+      <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
+    </Button>
   );
 }
