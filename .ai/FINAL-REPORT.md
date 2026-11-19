@@ -35,14 +35,16 @@ Local quality gates pass, and prior local accessibility/performance evidence is 
 - [x] README, CLAUDE.md, and scoped `.ai` state reconciled with the current repository
 
 ### Pending
-- [ ] Push the Linux import-casing/tooling fix and confirm a newer remote CI run is green
-- [ ] Configure `RESEND_API_KEY`, `CONTACT_EMAIL`, and the final `NEXT_PUBLIC_SITE_URL` in Vercel
-- [ ] Configure/verify a Resend sender and perform a controlled production delivery test
-- [ ] Deploy to Vercel with explicit approval
-- [ ] Verify production metadata, security headers, live accessibility, and contact behaviour
-- [ ] Apply the Vercel WAF rate limit and run live canary monitoring
-- [ ] Add dedicated user-path E2E tests
-- [ ] Make an explicit license decision; none is currently declared
+- [ ] Wait for PR CI to go green on `fix/ci-release-gates`.
+- [ ] Merge to `master` and confirm the post-merge run.
+- [ ] Enable `master` protection requiring `Typecheck, Lint, Unit tests, Build` and `Accessibility (axe-core)`.
+- [ ] Configure `RESEND_API_KEY`, `CONTACT_EMAIL`, and the final `NEXT_PUBLIC_SITE_URL` in Vercel.
+- [ ] Configure/verify a Resend sender and perform a controlled production delivery test.
+- [ ] Deploy to Vercel with explicit approval.
+- [ ] Verify production metadata, security headers, live accessibility, and contact behaviour.
+- [ ] Apply the Vercel WAF rate limit and run live canary monitoring.
+- [ ] Add dedicated user-path E2E tests.
+- [ ] Make an explicit license decision; none is currently declared.
 
 ## Quality Gate Status
 
