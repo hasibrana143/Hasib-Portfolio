@@ -62,11 +62,11 @@
 | No invented projects | project index contains only work that can be verified | ✅ (1 entry — this site) |
 | No invented claims | no "5+ years", no unverifiable open-source/article claims, no skill proficiency ratings | ✅ |
 | No placeholder contact address | no `your-email@example.com` rendered or mailed | ✅ (form-only, `CONTACT_EMAIL` is server-only) |
-| No placeholder links | no `yourusername` / `example.com` URLs in the source | ✅ (handles are name-derived, pending owner confirmation) |
+| No placeholder links | no `yourusername` / `example.com` URLs in the source | ✅ (GitHub, LinkedIn, and X handles are owner-confirmed) |
 | No boilerplate assets | unused create-next-app SVGs removed | ✅ |
 | Structured data | JSON-LD `Person` with `sameAs` present and valid | ✅ |
 | Every string owner-editable | content lives in `src/data/*` and `HomeContent.tsx`, not in components | ✅ |
-| Live social links | the three profile URLs resolve to the owner's real accounts | ⏳ owner confirmation |
+| Live social links | the three profile URLs resolve to the owner's real accounts | ✅ owner-confirmed |
 
 ## Final Sign-Off
 | Role | Name | Date | Signature |

@@ -4,17 +4,17 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
-const bio = `I build complete web products — interface, API, data layer and the pipeline that ships them. My default stack is React and Next.js on the front, TypeScript everywhere, and a CI gate that has to pass before anything reaches production.
+const bio = `My preferred way to build is end to end: interface, API boundary, and the checks that keep a release honest. I work primarily with React, Next.js, and TypeScript, with typecheck, lint, tests, and build required before CI passes.
 
-I care about the parts people actually feel: a fast first paint, a keyboard path that works, a form that fails loudly instead of quietly swallowing input. This site is the working proof — server-rendered for crawlers, a strict Content-Security-Policy, 35 automated accessibility checks across five browsers, and a Lighthouse run that lands at 98.`;
+I care about the parts people actually feel: a fast first paint, a keyboard path that works, a form that fails loudly instead of quietly swallowing input. This site is the working proof — server-rendered into the initial HTML, a production Content-Security-Policy, automated axe-core accessibility scans across five Playwright browser profiles, and a repeatable Lighthouse production audit.`;
 
 const experience = [
   {
-    role: "Independent Full-Stack Developer",
-    company: "Freelance",
+    role: "Full-Stack Developer",
+    company: "Independent",
     period: "Current",
     description:
-      "Taking projects from idea to production: Next.js interfaces, TypeScript APIs, PostgreSQL schemas and the CI/CD setup that keeps them deployable. Scope, stack and timeline are agreed up front; the code is handed over documented, with the checks that guard it still running.",
+      "Building end-to-end web products: a Next.js interface, a small TypeScript API route, shared validation, and CI gates for typecheck, lint, tests, build, and accessibility. This portfolio is the runnable reference.",
   },
 ];
 

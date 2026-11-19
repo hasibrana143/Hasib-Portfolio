@@ -1,4 +1,4 @@
-import { chromium } from "playwright";
+import { chromium } from "@playwright/test";
 import fs from "node:fs";
 
 const OUT = process.argv[2] || ".gstack/browse-reports/preview";

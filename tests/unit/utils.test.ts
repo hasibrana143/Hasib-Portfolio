@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { cn } from "@/lib/utils";
+import { projects } from "@/data/projects";
+import { skills, skillCategories } from "@/data/skills";
 
 describe("cn utility", () => {
   it("should merge class names correctly", () => {
@@ -20,40 +24,42 @@ describe("cn utility", () => {
 });
 
 describe("Project data validation", () => {
-  it("should have valid project structure", () => {
-    const project = {
-      id: "1",
-      title: "Test Project",
-      description: "A test project",
-      shortDescription: "Test",
-      image: "/images/test.jpg",
-      techStack: ["React", "TypeScript"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/test",
-      featured: true,
-      category: "fullstack" as const,
-    };
+  it("should export valid project structures", () => {
+    expect(projects.length).toBeGreaterThan(0);
 
-    expect(project.id).toBeDefined();
-    expect(project.title).toBeDefined();
-    expect(project.techStack).toBeInstanceOf(Array);
-    expect(["fullstack", "frontend", "backend", "mobile"]).toContain(project.category);
+    for (const project of projects) {
+      expect(project.id).toBeTruthy();
+      expect(project.title).toBeTruthy();
+      expect(project.description).toBeTruthy();
+      expect(project.shortDescription).toBeTruthy();
+      expect(project.image).toBeTruthy();
+      expect(
+        existsSync(join(process.cwd(), "public", project.image.replace(/^\/+/, "")))
+      ).toBe(true);
+      expect(project.techStack.length).toBeGreaterThan(0);
+      expect(project.techStack.every((technology) => technology.trim())).toBe(true);
+      expect(typeof project.featured).toBe("boolean");
+      expect(["fullstack", "frontend", "backend", "mobile"]).toContain(
+        project.category
+      );
+    }
   });
 });
 
 describe("Skill data validation", () => {
-  it("should have valid skill structure", () => {
-    const skill = {
-      name: "React",
-      category: "frontend" as const,
-      proficiency: 5,
-    };
+  it("should export valid skill structures", () => {
+    const configuredCategories = skillCategories.map(({ key }) => key);
 
-    expect(skill.name).toBeDefined();
-    expect(["frontend", "backend", "database", "devops", "tools"]).toContain(
-      skill.category
-    );
-    expect(skill.proficiency).toBeGreaterThanOrEqual(1);
-    expect(skill.proficiency).toBeLessThanOrEqual(5);
+    expect(skills.length).toBeGreaterThan(0);
+
+    for (const skill of skills) {
+      expect(skill.name).toBeTruthy();
+      expect(configuredCategories).toContain(skill.category);
+    }
+  });
+
+  it("should keep project ids and skill names unique", () => {
+    expect(new Set(projects.map(({ id }) => id)).size).toBe(projects.length);
+    expect(new Set(skills.map(({ name }) => name)).size).toBe(skills.length);
   });
 });

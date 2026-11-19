@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files (keep the safe template tracked)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -42,6 +43,7 @@ next-env.d.ts
 
 # local tooling output
 /.gstack/
+/strix_runs/
 /.playwright-mcp/
 /playwright-report/
 /test-results/

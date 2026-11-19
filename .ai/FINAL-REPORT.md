@@ -1,113 +1,153 @@
 # Final Report: Full-Stack Developer Portfolio
 
 ## Project Summary
-- **Project**: Personal Portfolio Website ("Hasib Rana")
-- **Role**: Full-Stack Developer Showcase
-- **Stack**: Next.js 16.4.6 (App Router, Turbopack, `cacheComponents`), TypeScript 5, Tailwind CSS v4, Radix/shadcn-style primitives, Framer Motion 11 (`LazyMotion`), React Hook Form 7 + Zod 4, Resend 6
-- **Design**: Editorial Swiss — paper `#FBF9F4`, warm ink, vermillion accent, Instrument Serif + Geist + Geist Mono, hairline rules, no shadows
-- **Deployment**: Vercel (intended; deferred by owner)
+- **Project**: Hasib Rana — Full-Stack Developer Portfolio
+- **GitHub**: <https://github.com/hasibrana143/Hasib-Portfolio>
+- **Repository rename**: The same GitHub repository was renamed from `Portfolio` to `Hasib-Portfolio`; the old URL redirects. It is not a new repository.
+- **Local checkout**: `C:\PROJECTS\Portfolio` (the local folder remains `Portfolio`)
+- **Release branch**: `fix/ci-release-gates` (targeting `master`)
+- **Stack**: Next.js 16.4.6 App Router (Turbopack, Cache Components), React 19.3, TypeScript 5 strict, Tailwind CSS 4, local Radix/shadcn-style primitives, Framer Motion 11 (`LazyMotion`), React Hook Form 7 + Zod 4, Resend 6
+- **Backend**: One dynamic Route Handler at `POST /api/contact`; no database, auth, CMS, Server Action, or middleware
+- **Content**: One verifiable case study (this portfolio), one non-employer experience row, repository-grounded technology groups, owner-confirmed social URLs
+- **Design**: Editorial Swiss — paper `#FBF9F4`, warm ink, vermillion accent, Instrument Serif + Geist + Geist Mono, hairline rules
+- **Deployment**: Vercel is the intended target; **no production deployment is confirmed**
+
+## Release Decision
+
+**NOT READY FOR RELEASE.**
+
+Local quality gates pass, and prior local accessibility/performance evidence is strong. Release is blocked by a failed remote CI run, required Resend key rotation, unconfirmed Vercel environment/deployment state, and no production contact-delivery or live canary evidence.
 
 ## Delivery Status
 
-### Completed
-- [x] Project discovery, requirements, architecture, risk assessment
-- [x] State files initialized and kept current (13/13)
-- [x] **Foundation (TASK-001…004)** — project setup, component library, structure, typed data
-- [x] **Core sections (TASK-005…009)** — Hero, About, Projects, Contact, Header, Footer
-- [x] **Editorial Swiss redesign** — full visual system, paper/ink/vermillion tokens, Instrument Serif, blueprint grid, film grain
-- [x] **SSR restored** — all sections server-rendered; content is crawlable and readable without JS
-- [x] **Security hardening** — CSP, HSTS, nosniff, frame-ancestors, referrer, permissions policy
-- [x] **Contact API hardened** — content-type check, 16 KB body cap, per-field length caps, honeypot, per-IP rate limit (5 / 10 min), HTML-escaped email body
-- [x] **Dependency remediation** — `npm audit` 0 vulnerabilities
-- [x] **SEO** — metadata, JSON-LD, robots, sitemap, real 1200x630 PNG OG image
-- [x] **CI** — GitHub Actions: typecheck, lint, unit, build, Playwright a11y
-- [x] **Bundle** — `LazyMotion` tree-shaking, 235 KB → 225 KB gzip first-load JS
-- [x] **Docs** — README + CLAUDE.md rewritten against the shipped code
-- [x] **Demo content → real content** — invented projects and employers removed, bio and experience rewritten around what the repository demonstrates, contact address unpublished (form-only), boilerplate assets deleted, JSON-LD `Person` added
+### Completed Locally
+- [x] Project discovery, typed requirements, architecture, risk assessment, and state files
+- [x] Next.js 16.4.6 App Router foundation, strict TypeScript, Tailwind v4, and local UI primitives
+- [x] Hero, About, Projects, Contact, Header, Footer, theme, and motion providers
+- [x] Server-rendered initial HTML with static section imports
+- [x] One-project editorial index and native `<dialog>` detail view
+- [x] Shared Zod contact contract and hardened Resend Route Handler
+- [x] CSP and standard security headers
+- [x] Metadata, JSON-LD `Person`, sitemap, robots route, and generated Open Graph image
+- [x] GitHub Actions workflow definition for typecheck, lint, unit, build, and accessibility
+- [x] Dependency remediation; current `npm audit` reports 0 vulnerabilities
+- [x] Content cleanup: demo projects, fictional employers, unsupported technologies, proficiency scores, and placeholder recipients removed
+- [x] README, CLAUDE.md, and scoped `.ai` state reconciled with the current repository
 
 ### Pending
-- [ ] Vercel production deploy + domain (owner deferred)
-- [ ] E2E user-path specs (a11y suite + API probes cover the current surface)
-- [ ] Canary monitoring on the live URL (needs a deploy)
-- [ ] Owner: confirm the three social handles, add the next project, set `RESEND_API_KEY` / `CONTACT_EMAIL` / `NEXT_PUBLIC_SITE_URL`
+- [ ] Push the Linux import-casing/tooling fix and confirm a newer remote CI run is green
+- [ ] Configure `RESEND_API_KEY`, `CONTACT_EMAIL`, and the final `NEXT_PUBLIC_SITE_URL` in Vercel
+- [ ] Configure/verify a Resend sender and perform a controlled production delivery test
+- [ ] Deploy to Vercel with explicit approval
+- [ ] Verify production metadata, security headers, live accessibility, and contact behaviour
+- [ ] Apply the Vercel WAF rate limit and run live canary monitoring
+- [ ] Add dedicated user-path E2E tests
+- [ ] Make an explicit license decision; none is currently declared
 
-## Quality Gates Status
+## Quality Gate Status
+
 | Gate | Status | Evidence |
-|------|--------|----------|
-| Requirements 100% | ✅ | REQUIREMENTS.md, PRD.md |
-| Architecture Review | ✅ | ARCHITECTURE.md, DECISIONS.md |
-| Build Pass | ✅ | `npm run build` exit 0 — 8 routes, all static pages generated |
-| TypeCheck Pass | ✅ | `npx tsc --noEmit` clean |
-| Lint Pass | ✅ | `npm run lint` 0 errors, 0 warnings |
-| Unit Tests | ✅ | 5/5 (Vitest) |
-| Integration (API) | ✅ | 6/6 trust-boundary probes against the production build |
-| E2E Tests | ⏳ | Not written; CI runs the a11y suite |
-| Accessibility | ✅ | 35/35 axe checks across 5 browser engines |
-| Lighthouse Performance | ✅ | 98 (LCP 0.8s, TBT 180ms, CLS 0) |
-| Lighthouse Accessibility | ✅ | 100 |
-| Lighthouse Best Practices | ✅ | 100 (0 console errors, 0 CSP violations) |
-| Lighthouse SEO | ✅ | 100 |
-| Security (Critical/High) | ✅ | 0 critical, 0 high, 0 medium open; `npm audit` 0 |
-| Deploy Health | ⏳ | Not deployed |
-| Documentation | ✅ | README, CLAUDE.md, `.ai/` state files |
+|---|---|---|
+| Requirements | PARTIAL | MVP implementation is shipped; production deployment and verification requirements remain open |
+| Architecture documentation | PASS | `.ai/ARCHITECTURE.md` matches the current source/build output |
+| Local build | PASS | `npm run build` exit 0 on 2026-11-19 |
+| Local typecheck | PASS | `npx tsc --noEmit` exit 0, no output |
+| Local lint | PASS | `npm run lint` exit 0; clean remote rerun pending |
+| Local unit tests | PASS | 7/7 Vitest tests across 2 files, 4.96 s |
+| API trust-boundary probes | PASS (prior local run) | 6/6: 415, 400 JSON, 400 schema, 200 honeypot, 413, 503 missing config |
+| Dedicated user-path E2E | PENDING | Suite not written |
+| Accessibility automation | PASS (prior local run) | 35/35 axe checks across five Playwright browser profiles |
+| Lighthouse | PASS (prior local run) | 99 Performance / 100 Accessibility / 100 Best Practices / 100 SEO |
+| Dependency audit | PASS | `npm audit` -> 0 vulnerabilities |
+| Remote GitHub Actions | **FAIL** | `ad21c23` run 44557145778 failed at typecheck/build; no newer green run confirmed |
+| Deploy health | PENDING | Not deployed/confirmed |
+| Documentation | PASS for scoped files | README, CLAUDE.md, and scoped `.ai` files updated; current worktree remains dirty |
 
-## Verification Evidence (2026-11-19, production build on :3100)
-```
-Build:         ✅ PASS (exit 0, ~8s)
-TypeScript:    ✅ PASS (strict, no errors)
-ESLint:        ✅ PASS (0 errors, 0 warnings)
-Unit Tests:    ✅ PASS (5/5, 1.6s)
-API Probes:    ✅ PASS (6/6 — 415 / 400 JSON / 400 schema / 200 honeypot / 413 / 503 no-key)
-Accessibility: ✅ PASS (35/35, 1.2m, 5 engines)
-Lighthouse:    ✅ 98 / 100 / 100 / 100  (FCP 0.8s, LCP 0.8s, TBT 180ms, CLS 0, 342 KiB total)
-Console:       ✅ 0 errors (light / dark / mobile)
-CSP:           ✅ 0 violations (securitypolicyviolation listener)
-npm audit:     ✅ 0 vulnerabilities
-First-load JS: 225 KB gzip browser-fetched (264 KB incl. the nomodule polyfill the browser skips)
+## Current Verification Evidence — 2026-11-20
+
+```text
+Build:         PASS (npm run build exit 0; Next.js 16.4.6; compiled successfully)
+TypeScript:    PASS (npx tsc --noEmit exit 0, no output)
+ESLint:        PASS (npm run lint exit 0, no output)
+Unit Tests:    PASS (2 files, 7/7 tests, 4.96 s)
+npm audit:     PASS (0 vulnerabilities)
+Remote CI:     FAIL (ad21c23; typecheck and build failed, downstream steps skipped)
 ```
 
-## Key Decisions Made
-1. **Framework**: Next.js 16 App Router (RSC, streaming, static generation)
-2. **Styling**: Tailwind CSS v4 (native cascade, design tokens)
-3. **Components**: Radix/shadcn-style local primitives (accessible, owned, no runtime)
-4. **Animations**: Framer Motion via `LazyMotion` + `domAnimation` (tree-shaken, reduced-motion safe)
-5. **Forms**: React Hook Form + Zod 4 shared schema + Resend API route
-6. **Deployment**: Vercel (zero-config, preview deploys) — deferred
-7. **Content**: Type-safe TS data files (no CMS for MVP)
-8. **Security posture**: strict CSP in production, `z.config({ jitless: true })` so no `new Function` ever runs
-Full rationale for each: `.ai/DECISIONS.md`
+The local lint command passed after a temporary generated-artifact directory was removed. The next clean remote CI run remains the authoritative Linux gate.
 
-## Risks & Blockers
-| Risk | Status | Mitigation |
-|------|--------|------------|
-| Social handles are name-derived | 🟠 ACTIVE | `hasibrana` on GitHub / LinkedIn / X — three URLs to confirm or correct in `src/data/constants.ts` |
-| Only one project published | 🟠 ACTIVE | The index takes new entries with no code change; the second project adds the category filter automatically |
-| Email delivery unverified | 🟠 ACTIVE | `RESEND_API_KEY` + `CONTACT_EMAIL` unset → route returns a clear 503; honeypot/rate-limit path already verified |
-| Rate limit is per-instance on serverless | 🟡 RESIDUAL | Vercel WAF rule documented in `.ai/DEPLOYMENT.md` — operator must apply it |
-| `unsafe-inline` in `script-src` | 🟡 RESIDUAL | Required by Next 16's inline hydration bootstrap under `cacheComponents`; nonce CSP would force dynamic rendering |
-| No E2E user-path specs | 🟡 OPEN | a11y suite + API probes cover the current surface; specs still to write |
-| E2E CI never ran on GitHub | 🟡 OPEN | Repo is not pushed; workflow is committed but unproven on a runner |
+## Prior Production-Build Evidence — 2026-11-19
 
-## Next Actions (Priority Order)
-1. Owner confirms the three social handles and adds the next project
-2. Owner sets `RESEND_API_KEY`, `CONTACT_EMAIL` and `NEXT_PUBLIC_SITE_URL`
-3. Push to GitHub → CI runs typecheck/lint/unit/build/a11y on the PR
-4. Deploy to Vercel, apply the WAF rate-limit rule, enable secret scanning + Dependabot
-5. Run the canary check against the live URL
-6. Write user-path E2E specs
+```text
+Accessibility: PASS (35/35, five Playwright browser profiles)
+Lighthouse:    PASS (99 / 100 / 100 / 100; report .gstack/lh-final-audit.json)
+API probes:    PASS (6/6 trust-boundary controls)
+Console/CSP:   PASS (0 errors / 0 violations in prior local production probe)
+```
 
-## Cost Estimate
-- **Vercel**: Free tier (hobby) — sufficient
-- **Resend**: Free tier (3,000 emails/month) — sufficient
-- **Domain**: ~$12/year (if custom)
-- **Total**: $0–12/year
+These results are local historical evidence, not live Vercel measurements.
+
+## Remote CI and Repository State
+
+- The active remote repository is now `hasibrana143/Hasib-Portfolio`; the former `Portfolio` URL redirects.
+- The latest confirmed remote commit is `ad21c231b26aae152910d818c894f6587de5f6ab` (`ad21c23`) on `master`.
+- Remote CI run: <https://github.com/hasibrana143/Hasib-Portfolio/actions/runs/44557145778>
+- Verified failure: Linux could not resolve `@/components/ui/button` because tracked UI filenames used different casing. The quality job failed at typecheck, and the accessibility job failed at build.
+- A local fix renames the affected files and updates CI/tooling. It must be pushed and confirmed by a newer green run.
+- The local worktree is dirty and contains both implementation changes and this documentation update. It is not itself a release artifact.
+
+## Key Decisions
+
+1. Next.js 16 App Router with Cache Components and static section imports
+2. Tailwind CSS 4 with project-owned tokens
+3. Local Radix/shadcn-style primitives
+4. Framer Motion `LazyMotion` + `domAnimation` + `m`
+5. React Hook Form + shared Zod 4 schema + Resend Route Handler
+6. Typed TypeScript content files; no CMS for the current scope
+7. Honest one-project content state until owner-provided cases exist
+8. No published contact address; form-only contact path
+9. Native `<dialog>` for project focus handling
+10. Per-instance limiter plus a documented global WAF requirement
+
+Detailed rationale remains in `.ai/DECISIONS.md`.
+
+## Active Risks and Blockers
+
+| Risk | Status | Required action |
+|---|---|---|
+| Remote CI red at `ad21c23` | RELEASE BLOCKER | Push fix and confirm a newer green run |
+| Vercel variables not confirmed | RELEASE BLOCKER | Configure all required variables before build/deploy |
+| No production deployment/canary | RELEASE BLOCKER | `https://hasibrana.vercel.app` currently returns 404; deploy with approval and run the live checklist |
+| Email delivery unverified | HIGH | Configure sender and perform a controlled production send |
+| Social URLs confirmed | LOW | GitHub, LinkedIn, and X handles are owner-confirmed; keep them synchronized with source |
+| Rate limiter is per-instance | RESIDUAL | Apply the Vercel WAF rule |
+| `unsafe-inline` in CSP | RESIDUAL | Accepted for the current rendering design |
+| No user-path E2E suite | OPEN | Add focused Playwright specs |
+| No repository license | OPEN | Obtain an explicit owner/legal decision |
+| Earlier local ignored template contained a Resend credential | RELEASE BLOCKER | Rotate the key and update local/Vercel configuration; rotation status is unconfirmed |
+
+## Next Actions — Priority Order
+
+1. Commit the local CI/tooling fix, including the sanitized `.env.example` and lowercase component renames.
+2. Push the fix and wait for explicit confirmation of a green GitHub Actions run on `master`.
+3. Review the final bio/technology wording for owner accuracy.
+4. Rotate the earlier Resend key, then configure the replacement in local/Vercel variables with a verified sender.
+5. Deploy to Vercel after its environment is configured and approved.
+6. Run the live verification checklist, including metadata, headers, keyboard path, contact delivery, WAF, and canary monitoring.
+7. Add focused user-path E2E tests.
+8. Decide and add an explicit repository license if reuse is intended.
+
+## Cost and Licensing
+
+- **Deployment/email/domain cost**: Not confirmed. Determine current provider pricing at purchase/use; no fixed cost or free-tier guarantee is claimed here.
+- **License**: No license file or repository license declaration is present. Do not imply that the project may be copied, modified, or redistributed until the owner makes an explicit legal decision.
 
 ## Owner Action Required
-1. **Social handles** — confirm or correct GitHub / LinkedIn / X URLs in `src/data/constants.ts`
-2. **Next project(s)** — name, stack and links; add to `src/data/projects.ts` with a 1280×720 SVG preview
-3. **Contact email** (`CONTACT_EMAIL`) and Resend key (`RESEND_API_KEY`) — server-only, never rendered
-4. **Preferred domain** (`NEXT_PUBLIC_SITE_URL`) — custom or vercel.app
-5. **Bio tweaks** — the current copy lives in `src/components/HomeContent.tsx` and is written around this repository's evidence; adjust the voice if it does not sound like you
+
+1. Review the bio, one independent role row, and repository-grounded technology list for accuracy.
+2. Provide any additional work as owner-supplied, verifiable content; do not ask the implementation to invent case studies.
+3. Choose the production domain and set the corresponding Vercel `NEXT_PUBLIC_SITE_URL`.
+4. Approve production deployment and, if intended, a repository license.
 
 ---
-*Report generated: 2026-11-19 · supersedes the 2026-11-12 draft*
+*Report updated: 2026-11-20 · supersedes earlier claims of green remote CI and completed deployment*

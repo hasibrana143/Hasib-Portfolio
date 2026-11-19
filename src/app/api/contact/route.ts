@@ -54,6 +54,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const contentLength = request.headers.get("content-length");
+    if (contentLength && Number(contentLength) > MAX_BODY_BYTES) {
+      return NextResponse.json({ message: "Request body too large" }, { status: 413 });
+    }
+
     const clientKey =
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       request.headers.get("x-real-ip") ||

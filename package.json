@@ -2,6 +2,10 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "npm@11.21.3",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,8 +17,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:a11y": "playwright test tests/a11y",
-    "test:unit": "vitest run tests/unit",
-    "lighthouse": "lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json --chrome-flags='--headless' || true"
+    "test:unit": "vitest run tests/unit"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

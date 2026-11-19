@@ -112,4 +112,46 @@
 - [ ] **TASK-025**: Owner content swap
   - Acceptance: no invented content on the site — real bio, real projects, real links
   - Owner: product owner
-  - **PARTIAL** 2026-11-19 — all demo content replaced: fake employers → honest independent/freelance entry, six invented projects → one verifiable case study, placeholder address → form-only contact, boilerplate assets deleted, JSON-LD `Person` added. Remaining: confirm the three social handles (`hasibrana` is name-derived) and add the next project
+  - **PARTIAL** 2026-11-19 — all demo content replaced: fake employers → honest independent entry, six invented projects → one verifiable case study, placeholder address → form-only contact, boilerplate assets deleted, JSON-LD `Person` added. Remaining: add the next real project if desired
+
+## Phase 6: Repository Audit & CI Repair (2026-11-19) — IN PROGRESS
+- [x] **TASK-026**: Repair Linux case-sensitivity failure
+  - Acceptance: tracked component filenames match imports on a case-sensitive filesystem
+  - Owner: devops
+  - **VERIFIED** 2026-11-19 — `Button.tsx` → `button.tsx`, `Card.tsx` → `card.tsx`; Linux Docker build passes
+- [x] **TASK-027**: Repair cross-platform lockfile
+  - Acceptance: clean Linux `npm ci` installs the required native CSS binary and builds without ad hoc packages
+  - Owner: devops
+  - **VERIFIED** 2026-11-19 — npm 11.21.3-generated lock retains Linux/macOS/Windows optional packages and 591 registry packages with `resolved` + `integrity`; a clean Linux Node 22 Docker `npm ci` and production build pass
+- [x] **TASK-028**: Align CI and local toolchain on Node 22.12+
+  - Acceptance: CI uses a supported Node version and npm audit remains 0
+  - Owner: devops
+  - **VERIFIED** 2026-11-19 — CI Node 22; local Node 22.23.2; audit 0
+- [x] **TASK-029**: Sanitize and track `.env.example`
+  - Acceptance: setup template contains no credentials and `.env.local` remains ignored/untracked
+  - Owner: security
+  - **VERIFIED** 2026-11-19 — placeholders only; tracked-secret scan 0
+- [x] **TASK-030**: Remove generated/process artifacts from Git
+  - Acceptance: only source, configuration, tests, and durable documentation are tracked
+  - Owner: cto
+  - **VERIFIED** 2026-11-19 — removed Playwright report, last-run metadata, completion marker, and stale summary
+- [ ] **TASK-031**: Push audit fixes and make remote CI green
+  - Acceptance: GitHub Actions quality and accessibility jobs both pass on `master`
+  - Owner: cto
+  - **NEXT**: commit, push to `Hasib-Portfolio`, and inspect the remote run
+- [ ] **TASK-032**: Protect `master`
+  - Acceptance: required quality/accessibility checks cannot be bypassed
+  - Owner: devops
+  - **NEXT**: enable branch protection after TASK-031 passes
+- [ ] **TASK-033**: Rotate the exposed Resend API key
+  - Acceptance: a new key replaces the key that appeared in the local template/chat history
+  - Owner: product owner
+  - **BLOCKED**: credential rotation requires owner access; do not log the value
+- [ ] **TASK-034**: Deploy and verify on Vercel
+  - Acceptance: live URL returns 200; contact delivery, console, CSP, a11y, and Lighthouse canaries pass
+  - Owner: devops
+  - **BLOCKED**: Vercel project/link and deployment environment variables are not confirmed; current configured URL returns 404
+- [ ] **TASK-035**: Run Strix diff-scoped exploit validation
+  - Acceptance: Strix completes a diff-scoped scan with Critical/High findings proven and reviewed
+  - Owner: security
+  - **BLOCKED**: Strix 1.6.2 is installed, but neither local LLM authentication nor managed-cloud authentication is configured; the independent source/diff review still reports Critical 0 / High 0
