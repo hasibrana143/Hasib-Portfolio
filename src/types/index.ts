@@ -14,8 +14,6 @@ export interface Project {
 export interface Skill {
   name: string;
   category: "frontend" | "backend" | "database" | "devops" | "tools";
-  proficiency: number; // 1-5
-  icon?: string;
 }
 
 export interface SocialLink {
@@ -30,6 +28,5 @@ export interface SiteConfig {
   description: string;
   url: string;
   ogImage: string;
-  email: string;
   socialLinks: SocialLink[];
 }

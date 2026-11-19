@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { skills, skillCategories } from "@/data/skills";
 import { Badge } from "@/components/ui/badge";
 
@@ -14,91 +14,112 @@ interface AboutSectionProps {
   }>;
 }
 
-export function AboutSection({ bio, experience }: AboutSectionProps) {
-  return (
-    <section id="about" className="py-20 px-6 md:py-28 lg:py-32" aria-labelledby="about-heading">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <h2 id="about-heading" className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            About Me
-          </h2>
-          <p className="text-lg text-muted-foreground">{bio}</p>
-        </motion.div>
+const EASE = [0.32, 0.72, 0, 1] as const;
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+export function AboutSection({ bio, experience }: AboutSectionProps) {
+  const [lead, ...rest] = bio.split("\n\n");
+
+  return (
+    <section id="about" className="border-t border-border px-6 py-24 md:py-32" aria-labelledby="about-heading">
+      <div className="mx-auto max-w-6xl">
+        <header className="grid gap-8 border-b border-border pb-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
+          <div>
+            <m.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="label flex items-center gap-3 text-muted-foreground"
+            >
+              <span aria-hidden="true" className="rule-accent h-px w-12" />
+              01 — Profile
+            </m.p>
+            <m.h2
+              id="about-heading"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="mt-6 font-display text-6xl leading-[0.9] tracking-[-0.03em] md:text-8xl"
+            >
+              About
+            </m.h2>
+          </div>
+
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
           >
-            <h3 className="mb-6 text-2xl font-semibold">Skills & Technologies</h3>
-            <div className="space-y-6">
+            <p className="font-display text-2xl leading-snug tracking-tight md:text-[1.75rem]">{lead}</p>
+            {rest.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)} className="mt-5 max-w-2xl leading-relaxed text-muted-foreground">
+                {paragraph}
+              </p>
+            ))}
+          </m.div>
+        </header>
+
+        <div className="grid gap-14 pt-14 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
+          <m.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
+            aria-labelledby="skills-heading"
+          >
+            <h3 id="skills-heading" className="label text-muted-foreground">
+              01.1 — Skills & technologies
+            </h3>
+            <div className="mt-8 space-y-8">
               {skillCategories.map((category) => (
-                <motion.div
-                  key={category.key}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <h4 className="mb-3 text-lg font-medium capitalize">{category.label}</h4>
-                  <div className="flex flex-wrap gap-2">
+                <div key={category.key}>
+                  <h4 className="font-display text-xl tracking-tight">{category.label}</h4>
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {skills
                       .filter((s) => s.category === category.key)
                       .map((skill) => (
-                        <Badge
-                          key={skill.name}
-                          variant="outline"
-                          className="gap-1 px-3 py-1"
-                        >
+                        <Badge key={skill.name} variant="outline">
                           {skill.name}
-                          <span className="text-xs text-muted-foreground">
-                            {skill.proficiency}/5
-                          </span>
                         </Badge>
                       ))}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </m.section>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <m.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
+            aria-labelledby="experience-heading"
           >
-            <h3 className="mb-6 text-2xl font-semibold">Experience</h3>
-            <div className="space-y-6">
+            <h3 id="experience-heading" className="label text-muted-foreground">
+              01.2 — Experience
+            </h3>
+            <ol className="mt-8 border-t border-border">
               {experience.map((exp, index) => (
-                <motion.div
+                <m.li
                   key={exp.role}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="p-6 rounded-lg border bg-card"
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
+                  className="grid gap-3 border-b border-border py-6 md:grid-cols-[10rem_1fr] md:gap-8"
                 >
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h4 className="font-semibold">{exp.role}</h4>
-                      <p className="text-sm text-muted-foreground">{exp.company}</p>
-                    </div>
-                    <span className="text-sm text-muted-foreground whitespace-nowrap">{exp.period}</span>
+                  <span className="label pt-1 text-muted-foreground">{exp.period}</span>
+                  <div>
+                    <h4 className="font-display text-2xl leading-tight tracking-tight">{exp.role}</h4>
+                    <p className="mt-1 text-sm text-accent">{exp.company}</p>
+                    <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">{exp.description}</p>
                   </div>
-                  <p className="mt-2 text-muted-foreground">{exp.description}</p>
-                </motion.div>
+                </m.li>
               ))}
-            </div>
-          </motion.div>
+            </ol>
+          </m.section>
         </div>
       </div>
     </section>

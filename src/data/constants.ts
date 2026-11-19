@@ -1,33 +1,29 @@
 import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-  name: "Your Name",
+  name: "Hasib Rana",
   title: "Full-Stack Developer",
   description:
-    "Full-stack developer specializing in React, Next.js, TypeScript, and cloud-native applications. Building scalable, accessible, and performant web experiences.",
-  url: "https://your-portfolio.vercel.app",
-  ogImage: "/images/og-image.svg",
-  email: "your-email@example.com",
+    "Full-stack developer building fast, accessible web products — interface, API and deployment pipeline — with React, Next.js and TypeScript.",
+  // Set NEXT_PUBLIC_SITE_URL in production; localhost is the local fallback.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  ogImage: "/opengraph-image",
+  // Social profiles. Updated 2026-11-19 with real handles.
   socialLinks: [
     {
       name: "GitHub",
-      url: "https://github.com/yourusername",
+      url: "https://github.com/hasibrana143",
       icon: "github",
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://www.linkedin.com/in/hasib-rana-199147367/",
       icon: "linkedin",
     },
     {
-      name: "Twitter",
-      url: "https://twitter.com/yourusername",
+      name: "X",
+      url: "https://x.com/hasib_rana76829",
       icon: "twitter",
-    },
-    {
-      name: "Email",
-      url: "mailto:your-email@example.com",
-      icon: "mail",
     },
   ],
 };
@@ -35,6 +31,5 @@ export const siteConfig: SiteConfig = {
 export const navLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];

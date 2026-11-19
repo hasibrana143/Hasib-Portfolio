@@ -1,223 +1,257 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, X } from "lucide-react";
+import { AnimatePresence, m } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { ArrowUpRight, ExternalLink, Github, X } from "lucide-react";
 import { projects } from "@/data/projects";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 
 type Category = "all" | "fullstack" | "frontend" | "backend" | "mobile";
 
-const categories: { value: Category; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "fullstack", label: "Full-Stack" },
-  { value: "frontend", label: "Frontend" },
-  { value: "backend", label: "Backend" },
-  { value: "mobile", label: "Mobile" },
-];
+const categoryLabels: Record<Category, string> = {
+  all: "All",
+  fullstack: "Full-Stack",
+  frontend: "Frontend",
+  backend: "Backend",
+  mobile: "Mobile",
+};
+
+// Only offer filters for categories that actually have projects.
+const availableCategories = Array.from(
+  new Set(projects.map((project) => project.category))
+);
+const categories = (["all", ...availableCategories] as Category[]).map((value) => ({
+  value,
+  label: categoryLabels[value],
+}));
+
+const EASE = [0.32, 0.72, 0, 1] as const;
 
 export function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState<Category>("all");
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const filteredProjects = projects.filter((p) =>
     activeCategory === "all" ? true : p.category === activeCategory
   );
 
-  const featuredProjects = filteredProjects.filter((p) => p.featured);
-  const otherProjects = filteredProjects.filter((p) => !p.featured);
+  // Native <dialog>.showModal() gives focus containment, inert background and
+  // Escape handling for free.
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (selectedProject && !dialog.open) dialog.showModal();
+    if (!selectedProject && dialog.open) dialog.close();
+
+    if (!selectedProject) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selectedProject]);
 
   return (
-    <section id="projects" className="py-20 px-6 md:py-28 lg:py-32" aria-labelledby="projects-heading">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12"
-        >
-          <h2 id="projects-heading" className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Featured Projects
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            A selection of projects I&apos;ve built, showcasing various technologies and problem-solving approaches.
-          </p>
-        </motion.div>
-
-        <div className="mb-10 flex flex-wrap items-center justify-center gap-2">
-          {categories.map((cat) => (
-            <Button
-              key={cat.value}
-              variant={activeCategory === cat.value ? "default" : "outline"}
-              size="sm"
-              onClick={() => setActiveCategory(cat.value)}
-              className="transition-all"
+    <section id="projects" className="border-t border-border px-6 py-24 md:py-32" aria-labelledby="projects-heading">
+      <div className="mx-auto max-w-6xl">
+        <header className="grid gap-8 border-b border-border pb-10 md:grid-cols-[0.85fr_1.15fr] md:items-end md:gap-16">
+          <div>
+            <m.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="label flex items-center gap-3 text-muted-foreground"
             >
-              {cat.label}
-            </Button>
-          ))}
-        </div>
+              <span aria-hidden="true" className="rule-accent h-px w-12" />
+              02 — Selected work
+            </m.p>
+            <m.h2
+              id="projects-heading"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="mt-6 font-display text-6xl leading-[0.9] tracking-[-0.03em] md:text-8xl"
+            >
+              Projects
+            </m.h2>
+          </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
+          <m.p
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
+            className="max-w-lg leading-relaxed text-muted-foreground md:justify-self-end"
           >
-            {featuredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+            A working record of what I build and how it holds up — the code, the checks, and
+            the numbers behind it.
+          </m.p>
+        </header>
 
-        {otherProjects.length > 0 && (
-          <>
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-16 mb-8 text-center text-2xl font-semibold"
-            >
-              Other Projects
-            </motion.h3>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {otherProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-              ))}
-            </motion.div>
-          </>
+        {availableCategories.length > 1 && (
+          <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
+            {categories.map((cat) => (
+              <Button
+                key={cat.value}
+                variant={activeCategory === cat.value ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveCategory(cat.value)}
+                aria-pressed={activeCategory === cat.value}
+              >
+                {cat.label}
+              </Button>
+            ))}
+          </div>
         )}
 
-        <AnimatePresence>
+        <AnimatePresence mode="wait" presenceAffectsLayout={false}>
+          <m.ul
+            key={activeCategory}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="mt-10 border-t border-border"
+          >
+            {filteredProjects.map((project, index) => (
+              <li key={project.id} className="border-b border-border">
+                <button
+                  onClick={() => setSelectedProject(project)}
+                  className="group grid w-full grid-cols-[2.5rem_1fr] items-start gap-4 py-8 text-left transition-colors duration-500 hover:bg-secondary/50 md:grid-cols-[4rem_1fr_auto] md:gap-8 md:px-4"
+                >
+                  <span className="label pt-2 text-muted-foreground">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <span className="block">
+                    <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                      <span className="font-display text-3xl leading-tight tracking-tight transition-colors duration-500 group-hover:text-accent md:text-4xl">
+                        {project.title}
+                      </span>
+                      {project.featured && (
+                        <span className="label text-accent">Featured</span>
+                      )}
+                    </span>
+                    <span className="mt-2 block max-w-xl leading-relaxed text-muted-foreground">
+                      {project.shortDescription}
+                    </span>
+                    <span className="label mt-4 flex flex-wrap gap-x-5 gap-y-1 text-muted-foreground">
+                      {project.techStack.slice(0, 4).map((tech) => (
+                        <span key={tech}>{tech}</span>
+                      ))}
+                      {project.techStack.length > 4 && (
+                        <span>+{project.techStack.length - 4}</span>
+                      )}
+                    </span>
+                  </span>
+
+                  <span className="hidden items-center gap-4 pt-2 md:flex">
+                    <span className="label text-muted-foreground">{project.category}</span>
+                    <ArrowUpRight
+                      className="h-5 w-5 text-muted-foreground transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </button>
+              </li>
+            ))}
+          </m.ul>
+        </AnimatePresence>
+
+        <AnimatePresence presenceAffectsLayout={false}>
           {selectedProject && (
-            <motion.div
+            <m.dialog
+              ref={dialogRef}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+              transition={{ duration: 0.3, ease: EASE }}
+              className="fixed inset-0 z-50 m-0 flex max-h-none w-full max-w-none items-center justify-center bg-foreground/60 p-4 backdrop:bg-foreground/60 md:p-8"
               onClick={() => setSelectedProject(null)}
-              role="dialog"
-              aria-modal="true"
+              onCancel={(event) => {
+                event.preventDefault();
+                setSelectedProject(null);
+              }}
               aria-labelledby="project-modal-title"
             >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              <m.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 24 }}
+                transition={{ duration: 0.5, ease: EASE }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl bg-white p-6 shadow-2xl dark:bg-gray-900"
+                className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto border border-border bg-background p-6 md:p-10"
               >
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="absolute right-4 top-4 rounded-full p-1 text-muted-foreground hover:bg-accent hover:text-foreground dark:hover:bg-gray-800"
+                  className="absolute right-4 top-4 p-1 text-muted-foreground transition-colors duration-500 hover:text-accent"
                   aria-label="Close modal"
                 >
                   <X className="h-5 w-5" />
                 </button>
 
-                <div className="aspect-video w-full rounded-lg overflow-hidden mb-6 bg-gray-100 dark:bg-gray-800">
-                  <div className="flex h-full items-center justify-center text-muted-foreground">
-                    Project Image Placeholder
-                  </div>
-                </div>
-
-                <h3 id="project-modal-title" className="mb-2 text-2xl font-bold">
+                <p className="label text-muted-foreground">{selectedProject.category}</p>
+                <h3
+                  id="project-modal-title"
+                  className="mt-3 font-display text-4xl leading-tight tracking-tight md:text-5xl"
+                >
                   {selectedProject.title}
                 </h3>
-                <p className="mb-6 text-muted-foreground">{selectedProject.description}</p>
 
-                <div className="mb-6 flex flex-wrap gap-2">
+                <div className="mt-8 aspect-video w-full overflow-hidden border border-border bg-card">
+                  <Image
+                    src={selectedProject.image}
+                    alt={`${selectedProject.title} preview`}
+                    width={1280}
+                    height={720}
+                    unoptimized
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+
+                <p className="mt-8 max-w-2xl leading-relaxed text-muted-foreground">
+                  {selectedProject.description}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
                   {selectedProject.techStack.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="text-sm">
+                    <Badge key={tech} variant="outline">
                       {tech}
                     </Badge>
                   ))}
                 </div>
 
-                <div className="flex flex-wrap gap-4">
+                <div className="mt-10 flex flex-wrap gap-3">
                   {selectedProject.liveUrl && (
-                    <Button asChild variant="default">
-                      <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                        <ExternalLink className="h-4 w-4" />
-                        Live Demo
+                    <Button asChild>
+                      <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer">
+                        Live demo
+                        <ExternalLink aria-hidden="true" />
                       </a>
                     </Button>
                   )}
                   {selectedProject.githubUrl && (
                     <Button asChild variant="outline">
-                      <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                        <Github className="h-4 w-4" />
-                        View Code
+                      <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
+                        View code
+                        <Github aria-hidden="true" />
                       </a>
                     </Button>
                   )}
                 </div>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.dialog>
           )}
         </AnimatePresence>
       </div>
     </section>
-  );
-}
-
-function ProjectCard({ project, index, onClick }: { project: typeof projects[0]; index: number; onClick: () => void }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="group relative"
-    >
-      <Card className="h-full overflow-hidden transition-shadow hover:shadow-xl">
-        <button
-          onClick={onClick}
-          onKeyDown={(e) => e.key === "Enter" && onClick()}
-          className="w-full h-full p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          aria-label={`View ${project.title} project details`}
-        >
-          <div className="aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-800">
-            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-              {project.image}
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
-          <CardContent className="p-6">
-            <div className="mb-3 flex flex-wrap gap-1">
-              {project.techStack.slice(0, 3).map((tech) => (
-                <Badge key={tech} variant="outline" className="text-xs">
-                  {tech}
-                </Badge>
-              ))}
-              {project.techStack.length > 3 && (
-                <Badge variant="outline" className="text-xs">
-                  +{project.techStack.length - 3}
-                </Badge>
-              )}
-            </div>
-            <h3 className="mb-2 text-xl font-semibold group-hover:text-primary transition-colors">
-              {project.title}
-            </h3>
-            <p className="text-sm text-muted-foreground line-clamp-2">{project.shortDescription}</p>
-          </CardContent>
-          <CardFooter className="flex items-center justify-between p-6 pt-0">
-            <span className="text-xs text-muted-foreground capitalize">{project.category}</span>
-            <span className="text-sm font-medium text-primary group-hover:underline">View Details</span>
-          </CardFooter>
-        </button>
-      </Card>
-    </motion.div>
   );
 }

@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local tooling output
+/.gstack/
+/.playwright-mcp/
+/playwright-report/
+/test-results/
+/dev-server*.log
+/lighthouse-report*.json

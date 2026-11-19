@@ -25,51 +25,54 @@
   --radius-sm: calc(var(--radius) - 4px);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-instrument-serif);
 }
 
+/* Editorial Swiss: paper, ink, one loud accent. */
 :root {
-  --radius: 0.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --radius: 0.25rem;
+
+  --background: oklch(0.985 0.004 95);
+  --foreground: oklch(0.17 0.008 85);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.17 0.008 85);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --popover-foreground: oklch(0.17 0.008 85);
+  --primary: oklch(0.17 0.008 85);
+  --primary-foreground: oklch(0.985 0.004 95);
+  --secondary: oklch(0.955 0.006 90);
+  --secondary-foreground: oklch(0.17 0.008 85);
+  --muted: oklch(0.96 0.005 90);
+  --muted-foreground: oklch(0.46 0.01 85);
+  --accent: oklch(0.55 0.2 33);
+  --accent-foreground: oklch(0.99 0.01 95);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.99 0.01 95);
+  --border: oklch(0.17 0.008 85 / 16%);
+  --input: oklch(0.17 0.008 85 / 30%);
+  --ring: oklch(0.55 0.2 33);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --background: oklch(0.16 0.008 85);
+  --foreground: oklch(0.97 0.004 95);
+  --card: oklch(0.2 0.008 85);
+  --card-foreground: oklch(0.97 0.004 95);
+  --popover: oklch(0.2 0.008 85);
+  --popover-foreground: oklch(0.97 0.004 95);
+  --primary: oklch(0.97 0.004 95);
+  --primary-foreground: oklch(0.16 0.008 85);
+  --secondary: oklch(0.24 0.008 85);
+  --secondary-foreground: oklch(0.97 0.004 95);
+  --muted: oklch(0.24 0.008 85);
+  --muted-foreground: oklch(0.66 0.008 85);
+  --accent: oklch(0.7 0.19 38);
+  --accent-foreground: oklch(0.16 0.008 85);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.16 0.008 85);
+  --border: oklch(0.97 0.004 95 / 16%);
+  --input: oklch(0.97 0.004 95 / 28%);
+  --ring: oklch(0.7 0.19 38);
 }
 
 @layer base {
@@ -79,11 +82,48 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+  /* Film grain: fixed so it never repaints on scroll. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Mono micro-label: the editorial voice of the whole site. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* Blueprint hairline grid. */
+  .editorial-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px);
+    background-size: 72px 72px;
+    background-position: center top;
+  }
+
+  /* Accent rule used under eyebrows. */
+  .rule-accent {
+    background: var(--accent);
   }
 }
 
@@ -95,5 +135,13 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Safety net: without JS the reveal animations never run, so content must not stay hidden. */
+@media (scripting: none) {
+  [style*="opacity:0"] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

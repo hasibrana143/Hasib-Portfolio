@@ -1,11 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Editorial Swiss portfolio preview">
   <defs>
-    <linearGradient id="project3" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
-    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#E7E2D8" stroke-width="1" />
+    </pattern>
   </defs>
-  <rect width="800" height="450" fill="url(#project3)"/>
-  <text x="400" y="200" font-family="system-ui, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Portfolio Template</text>
-  <text x="400" y="260" font-family="system-ui, sans-serif" font-size="24" fill="white" text-anchor="middle" opacity="0.9">High-Performance</text>
+
+  <rect width="1280" height="720" fill="#FBF9F4" />
+  <rect width="1280" height="720" fill="url(#grid)" />
+
+  <!-- masthead -->
+  <rect x="72" y="56" width="72" height="3" fill="#C4371C" />
+  <text x="164" y="64" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" letter-spacing="5" fill="#6B655C">00 — PORTFOLIO</text>
+  <line x1="72" y1="104" x2="1208" y2="104" stroke="#D9D3C7" stroke-width="2" />
+
+  <!-- hero lockup -->
+  <text x="72" y="268" font-family="Georgia, 'Times New Roman', serif" font-size="132" letter-spacing="-4" fill="#1A1815">Hasib</text>
+  <text x="72" y="392" font-family="Georgia, 'Times New Roman', serif" font-size="132" font-style="italic" letter-spacing="-4" fill="#C4371C">Rana</text>
+  <text x="76" y="452" font-family="system-ui, -apple-system, sans-serif" font-size="34" fill="#3A362F">Full-Stack Developer</text>
+
+  <text x="76" y="500" font-family="system-ui, -apple-system, sans-serif" font-size="21" fill="#6B655C">Interface, API, data layer and the pipeline that ships them.</text>
+
+  <!-- accent ring -->
+  <circle cx="1090" cy="300" r="150" fill="none" stroke="#C4371C" stroke-opacity="0.45" stroke-width="2" />
+
+  <!-- index column -->
+  <line x1="880" y1="168" x2="880" y2="560" stroke="#D9D3C7" stroke-width="2" />
+  <text x="920" y="196" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" letter-spacing="4" fill="#6B655C">INDEX</text>
+  <text x="920" y="252" font-family="Georgia, 'Times New Roman', serif" font-size="38" fill="#1A1815">01 — About</text>
+  <text x="920" y="312" font-family="Georgia, 'Times New Roman', serif" font-size="38" fill="#1A1815">02 — Projects</text>
+  <text x="920" y="372" font-family="Georgia, 'Times New Roman', serif" font-size="38" fill="#1A1815">03 — Contact</text>
+
+  <!-- footer strip -->
+  <line x1="72" y1="616" x2="1208" y2="616" stroke="#D9D3C7" stroke-width="2" />
+  <text x="72" y="664" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" letter-spacing="4" fill="#6B655C">REACT · NEXT.JS · TYPESCRIPT</text>
+  <text x="1208" y="664" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" letter-spacing="4" fill="#C4371C">OPEN TO WORK</text>
 </svg>

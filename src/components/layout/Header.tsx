@@ -1,109 +1,130 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, Sun, Moon } from "lucide-react";
-import { useState, useEffect } from "react";
+import { AnimatePresence, m } from "framer-motion";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { navLinks } from "@/data/constants";
+import { navLinks, siteConfig } from "@/data/constants";
+
+const siteHost = siteConfig.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   return (
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[60] bg-foreground px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-background"
       >
         Skip to main content
       </a>
-      <motion.header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
-          scrolled ? "bg-background/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
-        )}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-      >
-        <nav
-          className="mx-auto max-w-7xl px-6"
-          aria-label="Main navigation"
-        >
-          <div className="flex h-16 items-center justify-between">
-            <motion.a
-              href="#"
-              className="text-xl font-bold"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Portfolio
-            </motion.a>
 
-            <div className="hidden items-center gap-8 md:flex">
+      <header className="fixed inset-x-0 top-0 z-40 pt-4 md:pt-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 md:px-6">
+          <a
+            href="#hero"
+            className="font-display text-2xl leading-none tracking-tight transition-colors duration-500 hover:text-accent"
+          >
+            {siteConfig.name}
+          </a>
+
+          <nav aria-label="Main navigation" className="hidden md:block">
+            <ul className="flex items-center gap-1 rounded-full border border-border bg-background/85 px-2 py-1 backdrop-blur-md">
               {navLinks.map((link) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  whileHover={{ y: -2 }}
-                >
-                  {link.label}
-                </motion.a>
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="label block rounded-full px-4 py-2 text-muted-foreground transition-colors duration-500 hover:bg-secondary hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </li>
               ))}
-              <ThemeToggle />
-            </div>
+            </ul>
+          </nav>
 
-            <div className="flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-2">
+            <div className="hidden md:block">
               <ThemeToggle />
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setMobileMenuOpen(true)}
-                aria-label="Open menu"
-                aria-expanded={mobileMenuOpen}
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
             </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={mobileMenuOpen}
+              className="md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
           </div>
+        </div>
+      </header>
 
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden overflow-hidden bg-background border-t"
-              >
-                <div className="py-4 space-y-2">
-                  {navLinks.map((link) => (
-                    <motion.a
+      <AnimatePresence presenceAffectsLayout={false}>
+        {mobileMenuOpen && (
+          <m.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed inset-0 z-50 bg-background md:hidden"
+          >
+            <div className="flex h-full flex-col px-6 py-5">
+              <div className="flex items-center justify-between">
+                <span className="font-display text-2xl leading-none">{siteConfig.name}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
+
+              <nav aria-label="Mobile navigation" className="mt-20 flex-1">
+                <ul className="space-y-1">
+                  {navLinks.map((link, index) => (
+                    <m.li
                       key={link.href}
-                      href={link.href}
-                      className="block px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground"
-                      onClick={() => setMobileMenuOpen(false)}
+                      initial={{ y: 28 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: 0.08 * index + 0.1,
+                        duration: 0.5,
+                        ease: [0.32, 0.72, 0, 1],
+                      }}
                     >
-                      {link.label}
-                    </motion.a>
+                      <a
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block font-display text-6xl leading-[1.05] transition-colors duration-500 hover:text-accent"
+                      >
+                        {link.label}
+                      </a>
+                    </m.li>
                   ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </nav>
-      </motion.header>
+                </ul>
+              </nav>
+
+              <div className="label flex items-center justify-between border-t border-border pt-5 text-muted-foreground">
+                <span>Open to work</span>
+                <span>{siteHost}</span>
+              </div>
+            </div>
+          </m.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
@@ -117,7 +138,7 @@ function ThemeToggle() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (!mounted) return <div className="w-10 h-10" />;
+  if (!mounted) return <div className="h-10 w-10" />;
 
   return (
     <Button
@@ -126,8 +147,8 @@ function ThemeToggle() {
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Toggle theme"
     >
-      <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
+      <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform duration-500 dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-transform duration-500 dark:rotate-0 dark:scale-100" />
     </Button>
   );
 }

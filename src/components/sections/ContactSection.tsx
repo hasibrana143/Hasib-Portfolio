@@ -1,25 +1,18 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useState } from "react";
-import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { AlertCircle, ArrowUpRight, CheckCircle, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { siteConfig } from "@/data/constants";
+import { contactSchema, type ContactFormData } from "@/lib/contact-schema";
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  subject: z.string().min(5, "Subject must be at least 5 characters"),
-  message: z.string().min(20, "Message must be at least 20 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+const EASE = [0.32, 0.72, 0, 1] as const;
 
 export function ContactSection() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -59,60 +52,100 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 px-6 md:py-28 lg:py-32 bg-muted/30" aria-labelledby="contact-heading">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12"
-        >
-          <h2 id="contact-heading" className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Get In Touch
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Have a project in mind or just want to say hello? I&apos;d love to hear from you.
-          </p>
-        </motion.div>
+    <section id="contact" className="border-t border-border px-6 py-24 md:py-32" aria-labelledby="contact-heading">
+      <div className="mx-auto max-w-6xl">
+        <header className="grid gap-8 border-b border-border pb-10 md:grid-cols-[0.85fr_1.15fr] md:items-end md:gap-16">
+          <div>
+            <m.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="label flex items-center gap-3 text-muted-foreground"
+            >
+              <span aria-hidden="true" className="rule-accent h-px w-12" />
+              03 — Contact
+            </m.p>
+            <m.h2
+              id="contact-heading"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="mt-6 font-display text-6xl leading-[0.9] tracking-[-0.03em] md:text-8xl"
+            >
+              Say hello
+            </m.h2>
+          </div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <m.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
+            className="max-w-lg leading-relaxed text-muted-foreground md:justify-self-end"
           >
-            <h3 className="mb-6 text-2xl font-semibold">Let&apos;s Work Together</h3>
-            <p className="mb-8 text-muted-foreground">
-              I&apos;m always open to discussing new projects, freelance opportunities, or just chatting about technology.
-              Fill out the form and I&apos;ll get back to you as soon as possible.
-            </p>
+            Have a project in mind, a role to fill, or just want to compare notes on the stack? Send a
+            message — I reply to everything.
+          </m.p>
+        </header>
 
-            <div className="space-y-4">
+        <div className="grid gap-14 pt-14 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
+          >
+            <p className="label text-muted-foreground">Elsewhere</p>
+            <ul className="mt-5 border-t border-border">
               {siteConfig.socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-lg p-3 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                >
-                  <span className="text-xl" dangerouslySetInnerHTML={{ __html: getIcon(social.icon) }} />
-                  <span className="font-medium">{social.name}</span>
-                </a>
+                <li key={social.name} className="border-b border-border">
+                  <a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between py-4 transition-colors duration-500 hover:text-accent"
+                  >
+                    <span className="font-display text-2xl tracking-tight">{social.name}</span>
+                    <ArrowUpRight
+                      className="h-5 w-5 text-muted-foreground transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </li>
               ))}
-            </div>
-          </motion.div>
+            </ul>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            <div className="mt-8 flex items-center gap-3">
+              <span aria-hidden="true" className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              <span className="label text-muted-foreground">Available for new work</span>
+            </div>
+          </m.div>
+
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: EASE }}
           >
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
-              <div className="grid gap-4 sm:grid-cols-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
+              {/* Honeypot: hidden from people, visible to bots. Server drops any submission that fills it. */}
+              <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  {...register("website")}
+                />
+              </div>
+
+              <div className="grid gap-8 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
                   <Input
@@ -152,7 +185,7 @@ export function ContactSection() {
                 <Label htmlFor="subject">Subject</Label>
                 <Input
                   id="subject"
-                  placeholder="What&apos;s this about?"
+                  placeholder="What is this about?"
                   {...register("subject")}
                   disabled={status === "submitting"}
                   aria-invalid={errors.subject ? "true" : "false"}
@@ -183,62 +216,52 @@ export function ContactSection() {
                 )}
               </div>
 
-              <Button type="submit" className="w-full" disabled={status === "submitting"}>
-                {status === "submitting" && (
+              <Button type="submit" disabled={status === "submitting"}>
+                {status === "submitting" ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending...
+                    <Loader2 className="animate-spin" aria-hidden="true" />
+                    Sending
                   </>
-                )}
-                {status !== "submitting" && (
+                ) : (
                   <>
-                    Send Message
-                    <Send className="ml-2 h-4 w-4" />
+                    Send message
+                    <Send aria-hidden="true" />
                   </>
                 )}
               </Button>
 
-              <AnimatePresence>
+              <AnimatePresence presenceAffectsLayout={false}>
                 {status === "success" && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="flex items-center gap-2 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                    transition={{ duration: 0.4, ease: EASE }}
+                    className="flex items-center gap-3 border border-border bg-secondary p-4"
                     role="status"
                   >
-                    <CheckCircle className="h-5 w-5 shrink-0" />
-                    <p>Message sent successfully! I&apos;ll get back to you soon.</p>
-                  </motion.div>
+                    <CheckCircle className="h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+                    <p className="text-sm">Message sent successfully. I&apos;ll get back to you soon.</p>
+                  </m.div>
                 )}
                 {status === "error" && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="flex items-center gap-2 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/30 dark:text-red-400"
+                    transition={{ duration: 0.4, ease: EASE }}
+                    className="flex items-center gap-3 border border-destructive/40 bg-destructive/5 p-4"
                     role="alert"
                   >
-                    <AlertCircle className="h-5 w-5 shrink-0" />
-                    <p>{errorMessage}</p>
-                  </motion.div>
+                    <AlertCircle className="h-5 w-5 shrink-0 text-destructive" aria-hidden="true" />
+                    <p className="text-sm">{errorMessage}</p>
+                  </m.div>
                 )}
               </AnimatePresence>
             </form>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>
   );
 }
-
-function getIcon(name: string): string {
-  const icons: Record<string, string> = {
-    github: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
-    linkedin: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>',
-    twitter: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>',
-    mail: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
-  };
-  return icons[name] || "";
-}
-

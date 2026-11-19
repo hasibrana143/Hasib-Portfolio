@@ -1,9 +1,7 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-type ImpactValue = "critical" | "serious" | "moderate" | "minor";
-
-async function waitForTheme(page: any) {
+async function waitForTheme(page: Page) {
   // Wait for theme to be applied (next-themes adds 'dark' class or sets data-theme)
   await page.waitForFunction(() => {
     const html = document.documentElement;

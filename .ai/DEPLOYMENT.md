@@ -30,14 +30,33 @@ npm run build
 | `RESEND_API_KEY` | Email sending | Yes | Production, Preview |
 | `CONTACT_EMAIL` | Recipient email | Yes | Production, Preview |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL | Yes | All |
+| `RESEND_FROM_EMAIL` | Verified sender address | No | Production, Preview |
 | `NEXT_PUBLIC_GA_ID` | Analytics (optional) | No | Production |
+
+## Post-Deploy Operator Steps
+The application rate limiter is in-memory and therefore per-instance on serverless. Apply the Vercel WAF rate limit for the deployed URL — this is the authoritative global limit:
+
+```bash
+vercel firewall rules add "Rate limit contact" \
+  --condition '{"type":"path","op":"eq","value":"/api/contact"}' \
+  --condition '{"type":"method","op":"eq","value":"POST"}' \
+  --action rate_limit \
+  --rate-limit-window 600 \
+  --rate-limit-requests 5 \
+  --rate-limit-keys ip \
+  --yes
+```
+
+Vercel counts these per region, so a distributed flood can exceed the aggregate. If that matters, add the Vercel Firewall SDK or a shared store later.
+
+Also enable GitHub secret scanning and Dependabot on the repository.
 
 ## Deployment Pipeline
 1. Push to GitHub → Vercel auto-detects
 2. Preview deploy on every PR
 3. Merge to `main` → Production deploy
 4. Canary monitoring (10 min post-deploy)
-5. Health checks: `/`, `/api/health` (if added)
+5. Health checks: `GET /` returns 200
 
 ## Rollback
 - Vercel Dashboard → Deployments → Promote previous
