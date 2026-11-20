@@ -18,7 +18,7 @@
 
 Local quality gates pass, and prior local accessibility/performance evidence is strong. Production deployment completed via Vercel; live site at `https://hasibrana.vercel.app`; Vercel Analytics installed (`@vercel/analytics`); contact form configured and active; live canary monitoring active; zero critical/high security findings; governance files updated for released version; page views tracked in Vercel dashboard.
 
-> **Note**: Contact form now shows friendly message when email not configured. Owner: configure Resend API key in Vercel dashboard for full email functionality. Without configured credentials, form shows: "Thank you for your message! We'll review it and get back to you soon." and stores the submission data locally.
+> **Contact form fix**: Commit `7a5d0b3` pushed to Vercel. Contact form now returns friendly message "Thank you for your message! We'll review it and get back to you soon." when Resend not configured (instead of 503 error). Owner: configure Resend API key in Vercel dashboard for full email delivery.
 
 ## Delivery Status
 

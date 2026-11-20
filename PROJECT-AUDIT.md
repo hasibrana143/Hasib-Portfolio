@@ -23,7 +23,7 @@
 | Content truthfulness | COMPLETE | Invented employers, demo projects, placeholder address, fake skill ratings, and unsupported skill claims were removed. One verifiable case study remains. |
 | Contact API | COMPLETE | JSON content-type check, 16 KB body cap, field caps, honeypot, per-IP rate limit, HTML escaping, and configuration failure handling are present. Contact form: returns friendly message when Resend not configured; full email functionality after owner adds RESEND_API_KEY and CONTACT_EMAIL to Vercel env vars (1-minute setup). |
 | Secrets | PARTIAL | `.env.local` is ignored and untracked. `.env.example` is now a sanitized, tracked template with no credential values. The previously exposed Resend key should be rotated by the owner. |
-| CI | COMPLETE | Prior GitHub Actions run was red at `ad21c23` (Linux casing); fixes pushed to `fix/ci-release-gates`; green run confirmed; `@vercel/analytics` installed; `npm ci` + production build + accessibility suite all passing; merge to `master` enabled; branch protection active.
+| CI | COMPLETE | Prior GitHub Actions run was red at `ad21c23` (Linux casing); fixes pushed to `fix/ci-release-gates`; green run confirmed; `@vercel/analytics` installed; contact form fix pushed to `master` (commit 7a5d0b3); `npm ci` + production build + accessibility suite all passing; merge to `master` enabled; branch protection active.
 | Deployment | MISSING | `https://hasibrana.vercel.app` currently returns 404. No Vercel deployment or project link is confirmed. |
 | Repository governance | PARTIAL | `SECURITY.md` exists. No `LICENSE` has been added because the license choice belongs to the owner. Branch protection config exists in `.gstack/branch-protection.json`; enabled on GitHub after CI green. |
 

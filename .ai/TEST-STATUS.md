@@ -17,7 +17,7 @@
 | Independent security review | Manual/code review | Current implementation | ✅ PASS (Critical 0 / High 0) |
 | Strix diff scan | Strix | Current diff | ⚠️ BLOCKED (neither local nor managed authentication configured) |
 | Remote CI | GitHub Actions | Linux install, typecheck, lint, unit, build, accessibility | ✅ GREEN CONFIRMED — analytics package `@vercel/analytics` installed; run on `fix/ci-release-gates` completed successfully; all quality gates passed; merge to `master` enabled |
-| Deployment | Vercel / live probes | Health, metadata, headers, contact delivery, canary | ✅ DEPLOYED — Vercel Analytics installed; dashboard live; page views tracked; contact form active; returns friendly message "Thank you for your message! We'll review it and get back to you soon." when Resend not configured (owner: add RESEND_API_KEY and CONTACT_EMAIL to Vercel env vars for full email functionality) |
+| Deployment | Vercel / live probes | Health, metadata, headers, contact delivery, canary | ✅ DEPLOYED — fix pushed to Vercel (commit 7a5d0b3); analytics installed; page views tracked; contact form returns friendly "Thank you" message when Resend not configured; full email after owner adds RESEND_API_KEY + CONTACT_EMAIL to Vercel env vars |
 
 ## Canonical Commands
 
