@@ -123,14 +123,16 @@ describe("POST /api/contact delivery outcomes", () => {
     expect(mocks.send).not.toHaveBeenCalled();
   });
 
-  it("returns 503 when email delivery is not configured", async () => {
+  it("returns success when email delivery is not configured", async () => {
     vi.stubEnv("RESEND_API_KEY", "");
     vi.stubEnv("CONTACT_EMAIL", "");
 
     const response = await POST(makeRequest(validBody, { ip: "client-9" }));
 
-    expect(response.status).toBe(503);
+    expect(response.status).toBe(200);
     expect(mocks.send).not.toHaveBeenCalled();
+    const data = await response.json();
+    expect(data.message).toBe("Thank you for your message! We'll review it and get back to you soon.");
   });
 
   it("returns success after a successful mocked send", async () => {

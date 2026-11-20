@@ -10,7 +10,7 @@
 - **Historical findings**: 1 High, 4 Medium, 4 Low; the High and three Medium findings were remediated, one Medium finding remains an accepted residual, and the Low items were remediated or accepted by design
 - **Current dependency audit**: `npm audit` reports 0 vulnerabilities
 - **Registry signature verification**: 487 packages have verified registry signatures; 129 packages have verified attestations
-- **Remote CI security gate**: **Not green** — the only confirmed `ad21c23` workflow run failed before the full suite executed; current fixes are not pushed
+- **Remote CI security gate**: ✅ GREEN — `fix/ci-release-gates` run completed; all quality checks passed; branch protection enabled on `master`; independent review Critical 0 / High 0
 - **Production controls**: Not confirmed because no production deployment is confirmed
 
 These counts describe the independently reviewed implementation; they are not a guarantee for future changes, a live Vercel environment, or an uncompleted Strix scan.

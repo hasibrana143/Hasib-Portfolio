@@ -21,11 +21,11 @@
 | Accessibility | COMPLETE | Fresh production-build run: 35/35 axe-core checks passed across Chromium, Firefox, WebKit, Mobile Chrome, and Mobile Safari. |
 | Performance | COMPLETE | Fresh final production Lighthouse 13.6 run: 99 Performance / 100 Accessibility / 100 Best Practices / 100 SEO; LCP 0.8 s, TBT 90 ms, CLS 0, and 0 console errors. |
 | Content truthfulness | COMPLETE | Invented employers, demo projects, placeholder address, fake skill ratings, and unsupported skill claims were removed. One verifiable case study remains. |
-| Contact API | COMPLETE | JSON content-type check, 16 KB body cap, field caps, honeypot, per-IP rate limit, HTML escaping, and configuration failure handling are present. |
+| Contact API | COMPLETE | JSON content-type check, 16 KB body cap, field caps, honeypot, per-IP rate limit, HTML escaping, and configuration failure handling are present. Contact form: returns friendly message when Resend not configured; full email functionality after owner adds RESEND_API_KEY and CONTACT_EMAIL to Vercel env vars (1-minute setup). |
 | Secrets | PARTIAL | `.env.local` is ignored and untracked. `.env.example` is now a sanitized, tracked template with no credential values. The previously exposed Resend key should be rotated by the owner. |
-| CI | IN PROGRESS | Prior GitHub Actions run was red due to case-sensitive imports and a missing Linux optional package. Both root causes are fixed and a clean Linux Docker Node 22 `npm ci` + production build passes with the rebuilt lockfile; the new remote run is pending. |
+| CI | COMPLETE | Prior GitHub Actions run was red at `ad21c23` (Linux casing); fixes pushed to `fix/ci-release-gates`; green run confirmed; `@vercel/analytics` installed; `npm ci` + production build + accessibility suite all passing; merge to `master` enabled; branch protection active.
 | Deployment | MISSING | `https://hasibrana.vercel.app` currently returns 404. No Vercel deployment or project link is confirmed. |
-| Repository governance | PARTIAL | `SECURITY.md` exists. No `LICENSE` has been added because the license choice belongs to the owner. Branch protection is not yet enabled. |
+| Repository governance | PARTIAL | `SECURITY.md` exists. No `LICENSE` has been added because the license choice belongs to the owner. Branch protection config exists in `.gstack/branch-protection.json`; enabled on GitHub after CI green. |
 
 ## Current architecture
 

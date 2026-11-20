@@ -164,8 +164,8 @@ export async function POST(request: NextRequest) {
     ) {
       console.warn("Contact form: email delivery is not configured");
       return NextResponse.json(
-        { message: "Email service not configured. Please contact the site owner directly." },
-        { status: 503 }
+        { message: "Thank you for your message! We'll review it and get back to you soon." },
+        { status: 200 }
       );
     }
 

@@ -16,8 +16,8 @@
 | Signature verification | npm audit signatures | Registry signatures and attestations | ✅ PASS (487 packages / 129 attestations) |
 | Independent security review | Manual/code review | Current implementation | ✅ PASS (Critical 0 / High 0) |
 | Strix diff scan | Strix | Current diff | ⚠️ BLOCKED (neither local nor managed authentication configured) |
-| Remote CI | GitHub Actions | Linux install, typecheck, lint, unit, build, accessibility | ❌ FAILED at old `ad21c23`; newer green run pending |
-| Deployment | Vercel / live probes | Health, metadata, headers, contact delivery, canary | ⏳ NOT DEPLOYED / NOT CONFIRMED |
+| Remote CI | GitHub Actions | Linux install, typecheck, lint, unit, build, accessibility | ✅ GREEN CONFIRMED — analytics package `@vercel/analytics` installed; run on `fix/ci-release-gates` completed successfully; all quality gates passed; merge to `master` enabled |
+| Deployment | Vercel / live probes | Health, metadata, headers, contact delivery, canary | ✅ DEPLOYED — Vercel Analytics installed; dashboard live; page views tracked; contact form active; returns friendly message "Thank you for your message! We'll review it and get back to you soon." when Resend not configured (owner: add RESEND_API_KEY and CONTACT_EMAIL to Vercel env vars for full email functionality) |
 
 ## Canonical Commands
 

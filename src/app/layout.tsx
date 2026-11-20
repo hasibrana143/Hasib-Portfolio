@@ -6,6 +6,7 @@ import { MotionProvider } from "@/components/providers/MotionProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/data/constants";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -125,6 +126,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <Analytics />
           </MotionProvider>
         </ThemeProvider>
       </body>

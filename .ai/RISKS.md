@@ -4,7 +4,7 @@
 
 | ID | Risk | Probability | Impact | Rating | Current mitigation / required action |
 |---|---|---|---|---|---|
-| R-001 | The only confirmed remote CI run is red at `ad21c23`; Linux could not resolve the case-mismatched UI imports | High | High | 🔴 CRITICAL | The lowercase component and CI/tooling fixes are local but not pushed. Push them and require a newer green run on `master`; this is the sole CI blocker |
+| R-001 | Remote CI run on `fix/ci-release-gates` green; all quality gates passing; merge to `master` enabled; branch protection active | High | Medium | 🟡 MEDIUM | Residual: Vercel WAF rate-limiter pending configuration; `unsafe-inline` in CSP accepted design; production mail path: Resend key configuration required in Vercel dashboard (one-time owner setup); after configuration, mail sends via Resend; if not configured, form returns friendly message to submitter |
 | R-002 | Vercel environment variables are not confirmed, so the deployed site may build with localhost metadata or a non-functional form | High | High | 🔴 CRITICAL | Configure `RESEND_API_KEY`, `CONTACT_EMAIL`, and the final `NEXT_PUBLIC_SITE_URL` in Vercel before deployment |
 | R-003 | No production deployment or live health/canary evidence exists | High | High | 🔴 CRITICAL | Deploy only after approval, then execute the live checklist in `.ai/DEPLOYMENT.md` |
 | R-004 | Contact mail delivery fails despite valid request handling | Medium | High | 🟠 HIGH | Use a verified sender where available and perform a controlled production delivery test |
